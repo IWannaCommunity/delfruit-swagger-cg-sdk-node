@@ -19,6 +19,7 @@ import { Configuration } from '../configuration';
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { APIError } from '../models';
 import { Game } from '../models';
+import { GameExt } from '../models';
 import { InlineResponse200 } from '../models';
 import { InlineResponse204 } from '../models';
 import { PickGameNameOrUrlOrUrlSpdrnOrAuthorOrCollabOrDateCreatedOrOwnerId_ } from '../models';
@@ -102,6 +103,46 @@ export const GamesApiAxiosParamCreator = function (configuration?: Configuration
                 throw new RequiredError('id','Required parameter id was null or undefined when calling getGame.');
             }
             const localVarPath = `/games/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get Game
+         * @summary Get Game
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getGameCompositeAll: async (id: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling getGameCompositeAll.');
+            }
+            const localVarPath = `/games/composite/{id}/all`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -367,6 +408,144 @@ export const GamesApiAxiosParamCreator = function (configuration?: Configuration
          */
         getGames: async (authorization?: string, id?: number, removed?: boolean, name?: string, tags?: string, author?: string, ownerUserId?: number, hasDownload?: boolean, createdFrom?: Date, createdTo?: Date, clearedByUserId?: number, reviewedByUserId?: number, ratingFrom?: number, ratingTo?: number, difficultyFrom?: number, difficultyTo?: number, page?: number, limit?: number, orderCol?: string, orderDir?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/games`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (id !== undefined) {
+                localVarQueryParameter['id'] = id;
+            }
+
+            if (removed !== undefined) {
+                localVarQueryParameter['removed'] = removed;
+            }
+
+            if (name !== undefined) {
+                localVarQueryParameter['name'] = name;
+            }
+
+            if (tags !== undefined) {
+                localVarQueryParameter['tags'] = tags;
+            }
+
+            if (author !== undefined) {
+                localVarQueryParameter['author'] = author;
+            }
+
+            if (ownerUserId !== undefined) {
+                localVarQueryParameter['ownerUserId'] = ownerUserId;
+            }
+
+            if (hasDownload !== undefined) {
+                localVarQueryParameter['hasDownload'] = hasDownload;
+            }
+
+            if (createdFrom !== undefined) {
+                localVarQueryParameter['createdFrom'] = (createdFrom as any instanceof Date) ?
+                    (createdFrom as any).toISOString() :
+                    createdFrom;
+            }
+
+            if (createdTo !== undefined) {
+                localVarQueryParameter['createdTo'] = (createdTo as any instanceof Date) ?
+                    (createdTo as any).toISOString() :
+                    createdTo;
+            }
+
+            if (clearedByUserId !== undefined) {
+                localVarQueryParameter['clearedByUserId'] = clearedByUserId;
+            }
+
+            if (reviewedByUserId !== undefined) {
+                localVarQueryParameter['reviewedByUserId'] = reviewedByUserId;
+            }
+
+            if (ratingFrom !== undefined) {
+                localVarQueryParameter['ratingFrom'] = ratingFrom;
+            }
+
+            if (ratingTo !== undefined) {
+                localVarQueryParameter['ratingTo'] = ratingTo;
+            }
+
+            if (difficultyFrom !== undefined) {
+                localVarQueryParameter['difficultyFrom'] = difficultyFrom;
+            }
+
+            if (difficultyTo !== undefined) {
+                localVarQueryParameter['difficultyTo'] = difficultyTo;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (orderCol !== undefined) {
+                localVarQueryParameter['order_col'] = orderCol;
+            }
+
+            if (orderDir !== undefined) {
+                localVarQueryParameter['order_dir'] = orderDir;
+            }
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Game List
+         * @summary Game List
+         * @param {string} [authorization] 
+         * @param {number} [id] 
+         * @param {boolean} [removed] 
+         * @param {string} [name] 
+         * @param {string} [tags] 
+         * @param {string} [author] 
+         * @param {number} [ownerUserId] 
+         * @param {boolean} [hasDownload] 
+         * @param {Date} [createdFrom] 
+         * @param {Date} [createdTo] 
+         * @param {number} [clearedByUserId] 
+         * @param {number} [reviewedByUserId] 
+         * @param {number} [ratingFrom] 
+         * @param {number} [ratingTo] 
+         * @param {number} [difficultyFrom] 
+         * @param {number} [difficultyTo] 
+         * @param {number} [page] 
+         * @param {number} [limit] 
+         * @param {string} [orderCol] 
+         * @param {string} [orderDir] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getGamesWithRatings: async (authorization?: string, id?: number, removed?: boolean, name?: string, tags?: string, author?: string, ownerUserId?: number, hasDownload?: boolean, createdFrom?: Date, createdTo?: Date, clearedByUserId?: number, reviewedByUserId?: number, ratingFrom?: number, ratingTo?: number, difficultyFrom?: number, difficultyTo?: number, page?: number, limit?: number, orderCol?: string, orderDir?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/games/composite/rating`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -858,6 +1037,20 @@ export const GamesApiFp = function(configuration?: Configuration) {
             };
         },
         /**
+         * Get Game
+         * @summary Get Game
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getGameCompositeAll(id: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<GameExt>>> {
+            const localVarAxiosArgs = await GamesApiAxiosParamCreator(configuration).getGameCompositeAll(id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * Get Ratings for Game
          * @summary Get Ratings for Game
          * @param {number} id 
@@ -951,6 +1144,39 @@ export const GamesApiFp = function(configuration?: Configuration) {
          */
         async getGames(authorization?: string, id?: number, removed?: boolean, name?: string, tags?: string, author?: string, ownerUserId?: number, hasDownload?: boolean, createdFrom?: Date, createdTo?: Date, clearedByUserId?: number, reviewedByUserId?: number, ratingFrom?: number, ratingTo?: number, difficultyFrom?: number, difficultyTo?: number, page?: number, limit?: number, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Game>>>> {
             const localVarAxiosArgs = await GamesApiAxiosParamCreator(configuration).getGames(authorization, id, removed, name, tags, author, ownerUserId, hasDownload, createdFrom, createdTo, clearedByUserId, reviewedByUserId, ratingFrom, ratingTo, difficultyFrom, difficultyTo, page, limit, orderCol, orderDir, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Game List
+         * @summary Game List
+         * @param {string} [authorization] 
+         * @param {number} [id] 
+         * @param {boolean} [removed] 
+         * @param {string} [name] 
+         * @param {string} [tags] 
+         * @param {string} [author] 
+         * @param {number} [ownerUserId] 
+         * @param {boolean} [hasDownload] 
+         * @param {Date} [createdFrom] 
+         * @param {Date} [createdTo] 
+         * @param {number} [clearedByUserId] 
+         * @param {number} [reviewedByUserId] 
+         * @param {number} [ratingFrom] 
+         * @param {number} [ratingTo] 
+         * @param {number} [difficultyFrom] 
+         * @param {number} [difficultyTo] 
+         * @param {number} [page] 
+         * @param {number} [limit] 
+         * @param {string} [orderCol] 
+         * @param {string} [orderDir] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getGamesWithRatings(authorization?: string, id?: number, removed?: boolean, name?: string, tags?: string, author?: string, ownerUserId?: number, hasDownload?: boolean, createdFrom?: Date, createdTo?: Date, clearedByUserId?: number, reviewedByUserId?: number, ratingFrom?: number, ratingTo?: number, difficultyFrom?: number, difficultyTo?: number, page?: number, limit?: number, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<GameExt>>>> {
+            const localVarAxiosArgs = await GamesApiAxiosParamCreator(configuration).getGamesWithRatings(authorization, id, removed, name, tags, author, ownerUserId, hasDownload, createdFrom, createdTo, clearedByUserId, reviewedByUserId, ratingFrom, ratingTo, difficultyFrom, difficultyTo, page, limit, orderCol, orderDir, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1067,6 +1293,16 @@ export const GamesApiFactory = function (configuration?: Configuration, basePath
             return GamesApiFp(configuration).getGame(id, options).then((request) => request(axios, basePath));
         },
         /**
+         * Get Game
+         * @summary Get Game
+         * @param {string} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getGameCompositeAll(id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<GameExt>> {
+            return GamesApiFp(configuration).getGameCompositeAll(id, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Get Ratings for Game
          * @summary Get Ratings for Game
          * @param {number} id 
@@ -1144,6 +1380,35 @@ export const GamesApiFactory = function (configuration?: Configuration, basePath
          */
         async getGames(authorization?: string, id?: number, removed?: boolean, name?: string, tags?: string, author?: string, ownerUserId?: number, hasDownload?: boolean, createdFrom?: Date, createdTo?: Date, clearedByUserId?: number, reviewedByUserId?: number, ratingFrom?: number, ratingTo?: number, difficultyFrom?: number, difficultyTo?: number, page?: number, limit?: number, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Game>>> {
             return GamesApiFp(configuration).getGames(authorization, id, removed, name, tags, author, ownerUserId, hasDownload, createdFrom, createdTo, clearedByUserId, reviewedByUserId, ratingFrom, ratingTo, difficultyFrom, difficultyTo, page, limit, orderCol, orderDir, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Game List
+         * @summary Game List
+         * @param {string} [authorization] 
+         * @param {number} [id] 
+         * @param {boolean} [removed] 
+         * @param {string} [name] 
+         * @param {string} [tags] 
+         * @param {string} [author] 
+         * @param {number} [ownerUserId] 
+         * @param {boolean} [hasDownload] 
+         * @param {Date} [createdFrom] 
+         * @param {Date} [createdTo] 
+         * @param {number} [clearedByUserId] 
+         * @param {number} [reviewedByUserId] 
+         * @param {number} [ratingFrom] 
+         * @param {number} [ratingTo] 
+         * @param {number} [difficultyFrom] 
+         * @param {number} [difficultyTo] 
+         * @param {number} [page] 
+         * @param {number} [limit] 
+         * @param {string} [orderCol] 
+         * @param {string} [orderDir] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getGamesWithRatings(authorization?: string, id?: number, removed?: boolean, name?: string, tags?: string, author?: string, ownerUserId?: number, hasDownload?: boolean, createdFrom?: Date, createdTo?: Date, clearedByUserId?: number, reviewedByUserId?: number, ratingFrom?: number, ratingTo?: number, difficultyFrom?: number, difficultyTo?: number, page?: number, limit?: number, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<GameExt>>> {
+            return GamesApiFp(configuration).getGamesWithRatings(authorization, id, removed, name, tags, author, ownerUserId, hasDownload, createdFrom, createdTo, clearedByUserId, reviewedByUserId, ratingFrom, ratingTo, difficultyFrom, difficultyTo, page, limit, orderCol, orderDir, options).then((request) => request(axios, basePath));
         },
         /**
          * Update Game (Admin Only)
@@ -1239,6 +1504,17 @@ export class GamesApi extends BaseAPI {
         return GamesApiFp(this.configuration).getGame(id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
+     * Get Game
+     * @summary Get Game
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GamesApi
+     */
+    public async getGameCompositeAll(id: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<GameExt>> {
+        return GamesApiFp(this.configuration).getGameCompositeAll(id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
      * Get Ratings for Game
      * @summary Get Ratings for Game
      * @param {number} id 
@@ -1321,6 +1597,36 @@ export class GamesApi extends BaseAPI {
      */
     public async getGames(authorization?: string, id?: number, removed?: boolean, name?: string, tags?: string, author?: string, ownerUserId?: number, hasDownload?: boolean, createdFrom?: Date, createdTo?: Date, clearedByUserId?: number, reviewedByUserId?: number, ratingFrom?: number, ratingTo?: number, difficultyFrom?: number, difficultyTo?: number, page?: number, limit?: number, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Game>>> {
         return GamesApiFp(this.configuration).getGames(authorization, id, removed, name, tags, author, ownerUserId, hasDownload, createdFrom, createdTo, clearedByUserId, reviewedByUserId, ratingFrom, ratingTo, difficultyFrom, difficultyTo, page, limit, orderCol, orderDir, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Game List
+     * @summary Game List
+     * @param {string} [authorization] 
+     * @param {number} [id] 
+     * @param {boolean} [removed] 
+     * @param {string} [name] 
+     * @param {string} [tags] 
+     * @param {string} [author] 
+     * @param {number} [ownerUserId] 
+     * @param {boolean} [hasDownload] 
+     * @param {Date} [createdFrom] 
+     * @param {Date} [createdTo] 
+     * @param {number} [clearedByUserId] 
+     * @param {number} [reviewedByUserId] 
+     * @param {number} [ratingFrom] 
+     * @param {number} [ratingTo] 
+     * @param {number} [difficultyFrom] 
+     * @param {number} [difficultyTo] 
+     * @param {number} [page] 
+     * @param {number} [limit] 
+     * @param {string} [orderCol] 
+     * @param {string} [orderDir] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GamesApi
+     */
+    public async getGamesWithRatings(authorization?: string, id?: number, removed?: boolean, name?: string, tags?: string, author?: string, ownerUserId?: number, hasDownload?: boolean, createdFrom?: Date, createdTo?: Date, clearedByUserId?: number, reviewedByUserId?: number, ratingFrom?: number, ratingTo?: number, difficultyFrom?: number, difficultyTo?: number, page?: number, limit?: number, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<GameExt>>> {
+        return GamesApiFp(this.configuration).getGamesWithRatings(authorization, id, removed, name, tags, author, ownerUserId, hasDownload, createdFrom, createdTo, clearedByUserId, reviewedByUserId, ratingFrom, ratingTo, difficultyFrom, difficultyTo, page, limit, orderCol, orderDir, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Update Game (Admin Only)

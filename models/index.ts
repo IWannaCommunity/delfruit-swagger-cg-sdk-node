@@ -5,6 +5,8 @@ export * from './badge';
 export * from './edit-user-permissions-param';
 export * from './finalize-pass-reset-params';
 export * from './game';
+export * from './game-ext';
+export * from './game-ext-ratings';
 export * from './get-report-params';
 export * from './get-screenshot-parms';
 export * from './get-tags-parms';

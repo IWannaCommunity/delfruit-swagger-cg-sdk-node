@@ -13,6 +13,7 @@
  */
 export * from './apis/apiapi';
 export * from './apis/authentication-api';
+export * from './apis/composite-api';
 export * from './apis/default-api';
 export * from './apis/games-api';
 export * from './apis/lists-api';
