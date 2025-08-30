@@ -7,6 +7,7 @@ export * from './finalize-pass-reset-params';
 export * from './game';
 export * from './game-ext';
 export * from './game-ext-ratings';
+export * from './game-ext-tag';
 export * from './get-report-params';
 export * from './get-screenshot-parms';
 export * from './get-tags-parms';

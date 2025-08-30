@@ -13,6 +13,7 @@
  */
 
 import { GameExtRatings } from './game-ext-ratings';
+import { GameExtTag } from './game-ext-tag';
 import { Review } from './review';
 import { Screenshot } from './screenshot';
  /**
@@ -114,10 +115,10 @@ export interface GameExt {
     reviews: Array<Review>;
 
     /**
-     * @type {Array<string>}
+     * @type {Array<GameExtTag>}
      * @memberof GameExt
      */
-    tags: Array<string>;
+    tags: Array<GameExtTag>;
 
     /**
      * @type {Array<Screenshot>}
