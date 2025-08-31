@@ -387,6 +387,8 @@ export const GamesApiAxiosParamCreator = function (configuration?: Configuration
          * @param {number} [id] 
          * @param {boolean} [removed] 
          * @param {string} [name] 
+         * @param {string} [nameStartsWith] 
+         * @param {string} [nameExp] 
          * @param {string} [tags] 
          * @param {string} [author] 
          * @param {number} [ownerUserId] 
@@ -406,7 +408,7 @@ export const GamesApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getGames: async (authorization?: string, id?: number, removed?: boolean, name?: string, tags?: string, author?: string, ownerUserId?: number, hasDownload?: boolean, createdFrom?: Date, createdTo?: Date, clearedByUserId?: number, reviewedByUserId?: number, ratingFrom?: number, ratingTo?: number, difficultyFrom?: number, difficultyTo?: number, page?: number, limit?: number, orderCol?: string, orderDir?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getGames: async (authorization?: string, id?: number, removed?: boolean, name?: string, nameStartsWith?: string, nameExp?: string, tags?: string, author?: string, ownerUserId?: number, hasDownload?: boolean, createdFrom?: Date, createdTo?: Date, clearedByUserId?: number, reviewedByUserId?: number, ratingFrom?: number, ratingTo?: number, difficultyFrom?: number, difficultyTo?: number, page?: number, limit?: number, orderCol?: string, orderDir?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/games`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -428,6 +430,14 @@ export const GamesApiAxiosParamCreator = function (configuration?: Configuration
 
             if (name !== undefined) {
                 localVarQueryParameter['name'] = name;
+            }
+
+            if (nameStartsWith !== undefined) {
+                localVarQueryParameter['nameStartsWith'] = nameStartsWith;
+            }
+
+            if (nameExp !== undefined) {
+                localVarQueryParameter['nameExp'] = nameExp;
             }
 
             if (tags !== undefined) {
@@ -1123,6 +1133,8 @@ export const GamesApiFp = function(configuration?: Configuration) {
          * @param {number} [id] 
          * @param {boolean} [removed] 
          * @param {string} [name] 
+         * @param {string} [nameStartsWith] 
+         * @param {string} [nameExp] 
          * @param {string} [tags] 
          * @param {string} [author] 
          * @param {number} [ownerUserId] 
@@ -1142,8 +1154,8 @@ export const GamesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getGames(authorization?: string, id?: number, removed?: boolean, name?: string, tags?: string, author?: string, ownerUserId?: number, hasDownload?: boolean, createdFrom?: Date, createdTo?: Date, clearedByUserId?: number, reviewedByUserId?: number, ratingFrom?: number, ratingTo?: number, difficultyFrom?: number, difficultyTo?: number, page?: number, limit?: number, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Game>>>> {
-            const localVarAxiosArgs = await GamesApiAxiosParamCreator(configuration).getGames(authorization, id, removed, name, tags, author, ownerUserId, hasDownload, createdFrom, createdTo, clearedByUserId, reviewedByUserId, ratingFrom, ratingTo, difficultyFrom, difficultyTo, page, limit, orderCol, orderDir, options);
+        async getGames(authorization?: string, id?: number, removed?: boolean, name?: string, nameStartsWith?: string, nameExp?: string, tags?: string, author?: string, ownerUserId?: number, hasDownload?: boolean, createdFrom?: Date, createdTo?: Date, clearedByUserId?: number, reviewedByUserId?: number, ratingFrom?: number, ratingTo?: number, difficultyFrom?: number, difficultyTo?: number, page?: number, limit?: number, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Game>>>> {
+            const localVarAxiosArgs = await GamesApiAxiosParamCreator(configuration).getGames(authorization, id, removed, name, nameStartsWith, nameExp, tags, author, ownerUserId, hasDownload, createdFrom, createdTo, clearedByUserId, reviewedByUserId, ratingFrom, ratingTo, difficultyFrom, difficultyTo, page, limit, orderCol, orderDir, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1359,6 +1371,8 @@ export const GamesApiFactory = function (configuration?: Configuration, basePath
          * @param {number} [id] 
          * @param {boolean} [removed] 
          * @param {string} [name] 
+         * @param {string} [nameStartsWith] 
+         * @param {string} [nameExp] 
          * @param {string} [tags] 
          * @param {string} [author] 
          * @param {number} [ownerUserId] 
@@ -1378,8 +1392,8 @@ export const GamesApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getGames(authorization?: string, id?: number, removed?: boolean, name?: string, tags?: string, author?: string, ownerUserId?: number, hasDownload?: boolean, createdFrom?: Date, createdTo?: Date, clearedByUserId?: number, reviewedByUserId?: number, ratingFrom?: number, ratingTo?: number, difficultyFrom?: number, difficultyTo?: number, page?: number, limit?: number, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Game>>> {
-            return GamesApiFp(configuration).getGames(authorization, id, removed, name, tags, author, ownerUserId, hasDownload, createdFrom, createdTo, clearedByUserId, reviewedByUserId, ratingFrom, ratingTo, difficultyFrom, difficultyTo, page, limit, orderCol, orderDir, options).then((request) => request(axios, basePath));
+        async getGames(authorization?: string, id?: number, removed?: boolean, name?: string, nameStartsWith?: string, nameExp?: string, tags?: string, author?: string, ownerUserId?: number, hasDownload?: boolean, createdFrom?: Date, createdTo?: Date, clearedByUserId?: number, reviewedByUserId?: number, ratingFrom?: number, ratingTo?: number, difficultyFrom?: number, difficultyTo?: number, page?: number, limit?: number, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Game>>> {
+            return GamesApiFp(configuration).getGames(authorization, id, removed, name, nameStartsWith, nameExp, tags, author, ownerUserId, hasDownload, createdFrom, createdTo, clearedByUserId, reviewedByUserId, ratingFrom, ratingTo, difficultyFrom, difficultyTo, page, limit, orderCol, orderDir, options).then((request) => request(axios, basePath));
         },
         /**
          * Game List
@@ -1575,6 +1589,8 @@ export class GamesApi extends BaseAPI {
      * @param {number} [id] 
      * @param {boolean} [removed] 
      * @param {string} [name] 
+     * @param {string} [nameStartsWith] 
+     * @param {string} [nameExp] 
      * @param {string} [tags] 
      * @param {string} [author] 
      * @param {number} [ownerUserId] 
@@ -1595,8 +1611,8 @@ export class GamesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GamesApi
      */
-    public async getGames(authorization?: string, id?: number, removed?: boolean, name?: string, tags?: string, author?: string, ownerUserId?: number, hasDownload?: boolean, createdFrom?: Date, createdTo?: Date, clearedByUserId?: number, reviewedByUserId?: number, ratingFrom?: number, ratingTo?: number, difficultyFrom?: number, difficultyTo?: number, page?: number, limit?: number, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Game>>> {
-        return GamesApiFp(this.configuration).getGames(authorization, id, removed, name, tags, author, ownerUserId, hasDownload, createdFrom, createdTo, clearedByUserId, reviewedByUserId, ratingFrom, ratingTo, difficultyFrom, difficultyTo, page, limit, orderCol, orderDir, options).then((request) => request(this.axios, this.basePath));
+    public async getGames(authorization?: string, id?: number, removed?: boolean, name?: string, nameStartsWith?: string, nameExp?: string, tags?: string, author?: string, ownerUserId?: number, hasDownload?: boolean, createdFrom?: Date, createdTo?: Date, clearedByUserId?: number, reviewedByUserId?: number, ratingFrom?: number, ratingTo?: number, difficultyFrom?: number, difficultyTo?: number, page?: number, limit?: number, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Game>>> {
+        return GamesApiFp(this.configuration).getGames(authorization, id, removed, name, nameStartsWith, nameExp, tags, author, ownerUserId, hasDownload, createdFrom, createdTo, clearedByUserId, reviewedByUserId, ratingFrom, ratingTo, difficultyFrom, difficultyTo, page, limit, orderCol, orderDir, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Game List
