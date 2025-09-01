@@ -25,4 +25,5 @@ export * from './reset-request-params';
 export * from './review';
 export * from './screenshot';
 export * from './user-credentials';
+export * from './user-ext';
 export * from './user-registration';

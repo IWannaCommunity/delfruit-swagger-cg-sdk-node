@@ -31,4 +31,10 @@ export interface UserCredentials {
      * @memberof UserCredentials
      */
     password: string;
+
+    /**
+     * @type {number}
+     * @memberof UserCredentials
+     */
+    notARobot: number;
 }
