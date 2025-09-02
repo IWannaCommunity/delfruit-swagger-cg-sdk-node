@@ -20,8 +20,10 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 import { APIError } from '../models';
 import { Badge } from '../models';
 import { EditUserPermissionsParam } from '../models';
+import { OmitUserExtRatingsCountOrScreenshotCount_ } from '../models';
 import { Permission } from '../models';
 import { Review } from '../models';
+import { UserExt } from '../models';
 import { UserRegistration } from '../models';
 /**
  * UsersApi - axios parameter creator
@@ -120,6 +122,46 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             if (authorization !== undefined && authorization !== null) {
                 localVarHeaderParameter['Authorization'] = String(authorization);
             }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get User
+         * @summary Get User
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserCompositeAll: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling getUserCompositeAll.');
+            }
+            const localVarPath = `/composite/users/{id}/all`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -320,6 +362,70 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
 
             if (limit !== undefined) {
                 localVarQueryParameter['limit'] = limit;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * User List
+         * @summary User List
+         * @param {string} [authorization] 
+         * @param {string} [name] 
+         * @param {boolean} [following] 
+         * @param {boolean} [banned] 
+         * @param {number} [page] 
+         * @param {number} [limit] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUsersWithReviewsCount: async (authorization?: string, name?: string, following?: boolean, banned?: boolean, page?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/composite/users`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (name !== undefined) {
+                localVarQueryParameter['name'] = name;
+            }
+
+            if (following !== undefined) {
+                localVarQueryParameter['following'] = following;
+            }
+
+            if (banned !== undefined) {
+                localVarQueryParameter['banned'] = banned;
+            }
+
+            if (page !== undefined) {
+                localVarQueryParameter['page'] = page;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
             }
 
             const query = new URLSearchParams(localVarUrlObj.search);
@@ -611,6 +717,20 @@ export const UsersApiFp = function(configuration?: Configuration) {
             };
         },
         /**
+         * Get User
+         * @summary Get User
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUserCompositeAll(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<UserExt>>> {
+            const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).getUserCompositeAll(id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * User List
          * @summary User List
          * @param {string} [authorization] 
@@ -667,6 +787,25 @@ export const UsersApiFp = function(configuration?: Configuration) {
          */
         async getUsersReviews(id: number, page?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Review>>>> {
             const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).getUsersReviews(id, page, limit, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * User List
+         * @summary User List
+         * @param {string} [authorization] 
+         * @param {string} [name] 
+         * @param {boolean} [following] 
+         * @param {boolean} [banned] 
+         * @param {number} [page] 
+         * @param {number} [limit] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUsersWithReviewsCount(authorization?: string, name?: string, following?: boolean, banned?: boolean, page?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<OmitUserExtRatingsCountOrScreenshotCount_>>>> {
+            const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).getUsersWithReviewsCount(authorization, name, following, banned, page, limit, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -765,6 +904,16 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
             return UsersApiFp(configuration).getUser(id, authorization, options).then((request) => request(axios, basePath));
         },
         /**
+         * Get User
+         * @summary Get User
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUserCompositeAll(id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<UserExt>> {
+            return UsersApiFp(configuration).getUserCompositeAll(id, options).then((request) => request(axios, basePath));
+        },
+        /**
          * User List
          * @summary User List
          * @param {string} [authorization] 
@@ -809,6 +958,21 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          */
         async getUsersReviews(id: number, page?: number, limit?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Review>>> {
             return UsersApiFp(configuration).getUsersReviews(id, page, limit, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * User List
+         * @summary User List
+         * @param {string} [authorization] 
+         * @param {string} [name] 
+         * @param {boolean} [following] 
+         * @param {boolean} [banned] 
+         * @param {number} [page] 
+         * @param {number} [limit] 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUsersWithReviewsCount(authorization?: string, name?: string, following?: boolean, banned?: boolean, page?: number, limit?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<OmitUserExtRatingsCountOrScreenshotCount_>>> {
+            return UsersApiFp(configuration).getUsersWithReviewsCount(authorization, name, following, banned, page, limit, options).then((request) => request(axios, basePath));
         },
         /**
          * Updates a user. If a password is provided, then the old password must also be provided.
@@ -890,6 +1054,17 @@ export class UsersApi extends BaseAPI {
         return UsersApiFp(this.configuration).getUser(id, authorization, options).then((request) => request(this.axios, this.basePath));
     }
     /**
+     * Get User
+     * @summary Get User
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public async getUserCompositeAll(id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<UserExt>> {
+        return UsersApiFp(this.configuration).getUserCompositeAll(id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
      * User List
      * @summary User List
      * @param {string} [authorization] 
@@ -938,6 +1113,22 @@ export class UsersApi extends BaseAPI {
      */
     public async getUsersReviews(id: number, page?: number, limit?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Review>>> {
         return UsersApiFp(this.configuration).getUsersReviews(id, page, limit, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * User List
+     * @summary User List
+     * @param {string} [authorization] 
+     * @param {string} [name] 
+     * @param {boolean} [following] 
+     * @param {boolean} [banned] 
+     * @param {number} [page] 
+     * @param {number} [limit] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public async getUsersWithReviewsCount(authorization?: string, name?: string, following?: boolean, banned?: boolean, page?: number, limit?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<OmitUserExtRatingsCountOrScreenshotCount_>>> {
+        return UsersApiFp(this.configuration).getUsersWithReviewsCount(authorization, name, following, banned, page, limit, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Updates a user. If a password is provided, then the old password must also be provided.

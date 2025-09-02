@@ -26,7 +26,6 @@ import { PickGameNameOrUrlOrUrlSpdrnOrAuthorOrCollabOrDateCreatedOrOwnerId_ } fr
 import { Rating } from '../models';
 import { Review } from '../models';
 import { Screenshot } from '../models';
-import { UserExt } from '../models';
 /**
  * GamesApi - axios parameter creator
  * @export
@@ -678,46 +677,6 @@ export const GamesApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
-         * Get User
-         * @summary Get User
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        getUserCompositeAll: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'id' is not null or undefined
-            if (id === null || id === undefined) {
-                throw new RequiredError('id','Required parameter id was null or undefined when calling getUserCompositeAll.');
-            }
-            const localVarPath = `/composite/users/{id}/all`
-                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-            const query = new URLSearchParams(localVarUrlObj.search);
-            for (const key in localVarQueryParameter) {
-                query.set(key, localVarQueryParameter[key]);
-            }
-            for (const key in options.params) {
-                query.set(key, options.params[key]);
-            }
-            localVarUrlObj.search = (new URLSearchParams(query)).toString();
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
-                options: localVarRequestOptions,
-            };
-        },
-        /**
          * Update Game (Admin Only)
          * @summary Update Game (Admin Only)
          * @param {Game} body 
@@ -1248,20 +1207,6 @@ export const GamesApiFp = function(configuration?: Configuration) {
             };
         },
         /**
-         * Get User
-         * @summary Get User
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getUserCompositeAll(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<UserExt>>> {
-            const localVarAxiosArgs = await GamesApiAxiosParamCreator(configuration).getUserCompositeAll(id, options);
-            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
-                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
-                return axios.request(axiosRequestArgs);
-            };
-        },
-        /**
          * Update Game (Admin Only)
          * @summary Update Game (Admin Only)
          * @param {Game} body 
@@ -1494,16 +1439,6 @@ export const GamesApiFactory = function (configuration?: Configuration, basePath
             return GamesApiFp(configuration).getGamesWithRatings(authorization, q, id, removed, name, tags, author, ownerUserId, hasDownload, createdFrom, createdTo, clearedByUserId, reviewedByUserId, ratingFrom, ratingTo, difficultyFrom, difficultyTo, page, limit, orderCol, orderDir, options).then((request) => request(axios, basePath));
         },
         /**
-         * Get User
-         * @summary Get User
-         * @param {number} id 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async getUserCompositeAll(id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<UserExt>> {
-            return GamesApiFp(configuration).getUserCompositeAll(id, options).then((request) => request(axios, basePath));
-        },
-        /**
          * Update Game (Admin Only)
          * @summary Update Game (Admin Only)
          * @param {Game} body 
@@ -1724,17 +1659,6 @@ export class GamesApi extends BaseAPI {
      */
     public async getGamesWithRatings(authorization?: string, q?: string, id?: number, removed?: boolean, name?: string, tags?: string, author?: string, ownerUserId?: number, hasDownload?: boolean, createdFrom?: Date, createdTo?: Date, clearedByUserId?: number, reviewedByUserId?: number, ratingFrom?: number, ratingTo?: number, difficultyFrom?: number, difficultyTo?: number, page?: number, limit?: number, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<GameExt>>> {
         return GamesApiFp(this.configuration).getGamesWithRatings(authorization, q, id, removed, name, tags, author, ownerUserId, hasDownload, createdFrom, createdTo, clearedByUserId, reviewedByUserId, ratingFrom, ratingTo, difficultyFrom, difficultyTo, page, limit, orderCol, orderDir, options).then((request) => request(this.axios, this.basePath));
-    }
-    /**
-     * Get User
-     * @summary Get User
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof GamesApi
-     */
-    public async getUserCompositeAll(id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<UserExt>> {
-        return GamesApiFp(this.configuration).getUserCompositeAll(id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Update Game (Admin Only)
