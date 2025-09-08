@@ -346,10 +346,12 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
          * @param {number} id 
          * @param {number} [page] 
          * @param {number} [limit] 
+         * @param {string} [orderCol] 
+         * @param {string} [orderDir] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUsersReviews: async (id: number, page?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUsersReviews: async (id: number, page?: number, limit?: number, orderCol?: string, orderDir?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling getUsersReviews.');
@@ -372,6 +374,14 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
 
             if (limit !== undefined) {
                 localVarQueryParameter['limit'] = limit;
+            }
+
+            if (orderCol !== undefined) {
+                localVarQueryParameter['orderCol'] = orderCol;
+            }
+
+            if (orderDir !== undefined) {
+                localVarQueryParameter['orderDir'] = orderDir;
             }
 
             const query = new URLSearchParams(localVarUrlObj.search);
@@ -794,11 +804,13 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {number} id 
          * @param {number} [page] 
          * @param {number} [limit] 
+         * @param {string} [orderCol] 
+         * @param {string} [orderDir] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUsersReviews(id: number, page?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Review>>>> {
-            const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).getUsersReviews(id, page, limit, options);
+        async getUsersReviews(id: number, page?: number, limit?: number, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Review>>>> {
+            const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).getUsersReviews(id, page, limit, orderCol, orderDir, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -967,11 +979,13 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {number} id 
          * @param {number} [page] 
          * @param {number} [limit] 
+         * @param {string} [orderCol] 
+         * @param {string} [orderDir] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUsersReviews(id: number, page?: number, limit?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Review>>> {
-            return UsersApiFp(configuration).getUsersReviews(id, page, limit, options).then((request) => request(axios, basePath));
+        async getUsersReviews(id: number, page?: number, limit?: number, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Review>>> {
+            return UsersApiFp(configuration).getUsersReviews(id, page, limit, orderCol, orderDir, options).then((request) => request(axios, basePath));
         },
         /**
          * User List
@@ -1123,12 +1137,14 @@ export class UsersApi extends BaseAPI {
      * @param {number} id 
      * @param {number} [page] 
      * @param {number} [limit] 
+     * @param {string} [orderCol] 
+     * @param {string} [orderDir] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    public async getUsersReviews(id: number, page?: number, limit?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Review>>> {
-        return UsersApiFp(this.configuration).getUsersReviews(id, page, limit, options).then((request) => request(this.axios, this.basePath));
+    public async getUsersReviews(id: number, page?: number, limit?: number, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Review>>> {
+        return UsersApiFp(this.configuration).getUsersReviews(id, page, limit, orderCol, orderDir, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * User List
