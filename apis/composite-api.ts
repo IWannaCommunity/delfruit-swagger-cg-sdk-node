@@ -259,10 +259,12 @@ export const CompositeApiAxiosParamCreator = function (configuration?: Configura
          * @param {boolean} [banned] 
          * @param {number} [page] 
          * @param {number} [limit] 
+         * @param {string} [orderCol] 
+         * @param {string} [orderDir] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUsersWithReviewsCount: async (authorization?: string, name?: string, following?: boolean, banned?: boolean, page?: number, limit?: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUsersWithReviewsCount: async (authorization?: string, name?: string, following?: boolean, banned?: boolean, page?: number, limit?: number, orderCol?: string, orderDir?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/composite/users`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -292,6 +294,14 @@ export const CompositeApiAxiosParamCreator = function (configuration?: Configura
 
             if (limit !== undefined) {
                 localVarQueryParameter['limit'] = limit;
+            }
+
+            if (orderCol !== undefined) {
+                localVarQueryParameter['orderCol'] = orderCol;
+            }
+
+            if (orderDir !== undefined) {
+                localVarQueryParameter['orderDir'] = orderDir;
             }
 
             if (authorization !== undefined && authorization !== null) {
@@ -394,11 +404,13 @@ export const CompositeApiFp = function(configuration?: Configuration) {
          * @param {boolean} [banned] 
          * @param {number} [page] 
          * @param {number} [limit] 
+         * @param {string} [orderCol] 
+         * @param {string} [orderDir] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUsersWithReviewsCount(authorization?: string, name?: string, following?: boolean, banned?: boolean, page?: number, limit?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<OmitUserExtRatingsCountOrScreenshotCount_>>>> {
-            const localVarAxiosArgs = await CompositeApiAxiosParamCreator(configuration).getUsersWithReviewsCount(authorization, name, following, banned, page, limit, options);
+        async getUsersWithReviewsCount(authorization?: string, name?: string, following?: boolean, banned?: boolean, page?: number, limit?: number, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<OmitUserExtRatingsCountOrScreenshotCount_>>>> {
+            const localVarAxiosArgs = await CompositeApiAxiosParamCreator(configuration).getUsersWithReviewsCount(authorization, name, following, banned, page, limit, orderCol, orderDir, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -472,11 +484,13 @@ export const CompositeApiFactory = function (configuration?: Configuration, base
          * @param {boolean} [banned] 
          * @param {number} [page] 
          * @param {number} [limit] 
+         * @param {string} [orderCol] 
+         * @param {string} [orderDir] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUsersWithReviewsCount(authorization?: string, name?: string, following?: boolean, banned?: boolean, page?: number, limit?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<OmitUserExtRatingsCountOrScreenshotCount_>>> {
-            return CompositeApiFp(configuration).getUsersWithReviewsCount(authorization, name, following, banned, page, limit, options).then((request) => request(axios, basePath));
+        async getUsersWithReviewsCount(authorization?: string, name?: string, following?: boolean, banned?: boolean, page?: number, limit?: number, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<OmitUserExtRatingsCountOrScreenshotCount_>>> {
+            return CompositeApiFp(configuration).getUsersWithReviewsCount(authorization, name, following, banned, page, limit, orderCol, orderDir, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -550,11 +564,13 @@ export class CompositeApi extends BaseAPI {
      * @param {boolean} [banned] 
      * @param {number} [page] 
      * @param {number} [limit] 
+     * @param {string} [orderCol] 
+     * @param {string} [orderDir] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CompositeApi
      */
-    public async getUsersWithReviewsCount(authorization?: string, name?: string, following?: boolean, banned?: boolean, page?: number, limit?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<OmitUserExtRatingsCountOrScreenshotCount_>>> {
-        return CompositeApiFp(this.configuration).getUsersWithReviewsCount(authorization, name, following, banned, page, limit, options).then((request) => request(this.axios, this.basePath));
+    public async getUsersWithReviewsCount(authorization?: string, name?: string, following?: boolean, banned?: boolean, page?: number, limit?: number, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<OmitUserExtRatingsCountOrScreenshotCount_>>> {
+        return CompositeApiFp(this.configuration).getUsersWithReviewsCount(authorization, name, following, banned, page, limit, orderCol, orderDir, options).then((request) => request(this.axios, this.basePath));
     }
 }
