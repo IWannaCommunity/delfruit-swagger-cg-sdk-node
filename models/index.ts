@@ -13,6 +13,7 @@ export * from './get-screenshot-parms';
 export * from './get-tags-parms';
 export * from './id-screenshots-body';
 export * from './inline-response200';
+export * from './inline-response2001';
 export * from './inline-response204';
 export * from './list';
 export * from './message';

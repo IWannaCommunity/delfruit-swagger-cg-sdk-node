@@ -20,6 +20,7 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 import { APIError } from '../models';
 import { Badge } from '../models';
 import { EditUserPermissionsParam } from '../models';
+import { InlineResponse2001 } from '../models';
 import { OmitUserExtRatingsCountOrScreenshotCount_ } from '../models';
 import { Permission } from '../models';
 import { Review } from '../models';
@@ -162,6 +163,64 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Returns if you are following a user.
+         * @summary Check Following (User/Admin Only)
+         * @param {string} authorization 
+         * @param {number} followerId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserFollow: async (authorization: string, followerId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling getUserFollow.');
+            }
+            // verify required parameter 'followerId' is not null or undefined
+            if (followerId === null || followerId === undefined) {
+                throw new RequiredError('followerId','Required parameter followerId was null or undefined when calling getUserFollow.');
+            }
+            const localVarPath = `/users/follows/{followerId}`
+                .replace(`{${"followerId"}}`, encodeURIComponent(String(followerId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -761,6 +820,21 @@ export const UsersApiFp = function(configuration?: Configuration) {
             };
         },
         /**
+         * Returns if you are following a user.
+         * @summary Check Following (User/Admin Only)
+         * @param {string} authorization 
+         * @param {number} followerId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUserFollow(authorization: string, followerId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse2001>>> {
+            const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).getUserFollow(authorization, followerId, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * User List
          * @summary User List
          * @param {string} [authorization] 
@@ -950,6 +1024,17 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
             return UsersApiFp(configuration).getUserCompositeAll(id, options).then((request) => request(axios, basePath));
         },
         /**
+         * Returns if you are following a user.
+         * @summary Check Following (User/Admin Only)
+         * @param {string} authorization 
+         * @param {number} followerId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUserFollow(authorization: string, followerId: number, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2001>> {
+            return UsersApiFp(configuration).getUserFollow(authorization, followerId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * User List
          * @summary User List
          * @param {string} [authorization] 
@@ -1105,6 +1190,18 @@ export class UsersApi extends BaseAPI {
      */
     public async getUserCompositeAll(id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<UserExt>> {
         return UsersApiFp(this.configuration).getUserCompositeAll(id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Returns if you are following a user.
+     * @summary Check Following (User/Admin Only)
+     * @param {string} authorization 
+     * @param {number} followerId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public async getUserFollow(authorization: string, followerId: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse2001>> {
+        return UsersApiFp(this.configuration).getUserFollow(authorization, followerId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * User List
