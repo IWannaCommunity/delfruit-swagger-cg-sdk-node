@@ -85,4 +85,10 @@ export interface PickUserExtExcludeKeyofUserExtRatingsCountOrScreenshotCount_ {
      * @memberof PickUserExtExcludeKeyofUserExtRatingsCountOrScreenshotCount_
      */
     reviewCount: number;
+
+    /**
+     * @type {boolean}
+     * @memberof PickUserExtExcludeKeyofUserExtRatingsCountOrScreenshotCount_
+     */
+    isFollowing: boolean;
 }

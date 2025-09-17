@@ -214,10 +214,11 @@ export const CompositeApiAxiosParamCreator = function (configuration?: Configura
          * Get User
          * @summary Get User
          * @param {number} id 
+         * @param {string} [authorization] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getUserCompositeAll: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getUserCompositeAll: async (id: number, authorization?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling getUserCompositeAll.');
@@ -233,6 +234,10 @@ export const CompositeApiAxiosParamCreator = function (configuration?: Configura
             const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -385,11 +390,12 @@ export const CompositeApiFp = function(configuration?: Configuration) {
          * Get User
          * @summary Get User
          * @param {number} id 
+         * @param {string} [authorization] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserCompositeAll(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<UserExt>>> {
-            const localVarAxiosArgs = await CompositeApiAxiosParamCreator(configuration).getUserCompositeAll(id, options);
+        async getUserCompositeAll(id: number, authorization?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<UserExt>>> {
+            const localVarAxiosArgs = await CompositeApiAxiosParamCreator(configuration).getUserCompositeAll(id, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -469,11 +475,12 @@ export const CompositeApiFactory = function (configuration?: Configuration, base
          * Get User
          * @summary Get User
          * @param {number} id 
+         * @param {string} [authorization] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserCompositeAll(id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<UserExt>> {
-            return CompositeApiFp(configuration).getUserCompositeAll(id, options).then((request) => request(axios, basePath));
+        async getUserCompositeAll(id: number, authorization?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<UserExt>> {
+            return CompositeApiFp(configuration).getUserCompositeAll(id, authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * User List
@@ -548,12 +555,13 @@ export class CompositeApi extends BaseAPI {
      * Get User
      * @summary Get User
      * @param {number} id 
+     * @param {string} [authorization] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof CompositeApi
      */
-    public async getUserCompositeAll(id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<UserExt>> {
-        return CompositeApiFp(this.configuration).getUserCompositeAll(id, options).then((request) => request(this.axios, this.basePath));
+    public async getUserCompositeAll(id: number, authorization?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<UserExt>> {
+        return CompositeApiFp(this.configuration).getUserCompositeAll(id, authorization, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * User List

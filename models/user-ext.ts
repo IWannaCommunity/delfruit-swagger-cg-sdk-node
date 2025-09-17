@@ -97,4 +97,10 @@ export interface UserExt {
      * @memberof UserExt
      */
     screenshotCount: number;
+
+    /**
+     * @type {boolean}
+     * @memberof UserExt
+     */
+    isFollowing: boolean;
 }
