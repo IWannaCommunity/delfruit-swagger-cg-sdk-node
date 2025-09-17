@@ -25,6 +25,7 @@ import { OmitUserExtRatingsCountOrScreenshotCount_ } from '../models';
 import { Permission } from '../models';
 import { Review } from '../models';
 import { UserExt } from '../models';
+import { UserPermissions } from '../models';
 import { UserRegistration } from '../models';
 /**
  * UsersApi - axios parameter creator
@@ -387,6 +388,54 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
 
             if (limit !== undefined) {
                 localVarQueryParameter['limit'] = limit;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} uid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUsersPermissions: async (uid: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'uid' is not null or undefined
+            if (uid === null || uid === undefined) {
+                throw new RequiredError('uid','Required parameter uid was null or undefined when calling getUsersPermissions.');
+            }
+            const localVarPath = `/users/{uid}/permissions`
+                .replace(`{${"uid"}}`, encodeURIComponent(String(uid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
             }
 
             const query = new URLSearchParams(localVarUrlObj.search);
@@ -891,6 +940,19 @@ export const UsersApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {number} uid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUsersPermissions(uid: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<UserPermissions>>> {
+            const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).getUsersPermissions(uid, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
          * @param {number} id 
          * @param {number} [page] 
          * @param {number} [limit] 
@@ -1080,6 +1142,15 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
+         * @param {number} uid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUsersPermissions(uid: number, options?: AxiosRequestConfig): Promise<AxiosResponse<UserPermissions>> {
+            return UsersApiFp(configuration).getUsersPermissions(uid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {number} id 
          * @param {number} [page] 
          * @param {number} [limit] 
@@ -1250,6 +1321,16 @@ export class UsersApi extends BaseAPI {
      */
     public async getUsersLists(uid: number, page?: number, limit?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<any>>> {
         return UsersApiFp(this.configuration).getUsersLists(uid, page, limit, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {number} uid 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public async getUsersPermissions(uid: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<UserPermissions>> {
+        return UsersApiFp(this.configuration).getUsersPermissions(uid, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 

@@ -30,4 +30,5 @@ export * from './review';
 export * from './screenshot';
 export * from './user-credentials';
 export * from './user-ext';
+export * from './user-permissions';
 export * from './user-registration';

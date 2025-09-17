@@ -78,6 +78,57 @@ export const MessagesApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @param {string} authorization 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMessagesFromOutbox: async (authorization: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling getMessagesFromOutbox.');
+            }
+            const localVarPath = `/message/outbox`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} authorization 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -217,6 +268,19 @@ export const MessagesApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} authorization 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getMessagesFromOutbox(authorization: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Message>>>> {
+            const localVarAxiosArgs = await MessagesApiAxiosParamCreator(configuration).getMessagesFromOutbox(authorization, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @param {string} authorization 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -263,6 +327,15 @@ export const MessagesApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @param {string} authorization 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getMessagesFromOutbox(authorization: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Message>>> {
+            return MessagesApiFp(configuration).getMessagesFromOutbox(authorization, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} authorization 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -299,6 +372,16 @@ export class MessagesApi extends BaseAPI {
      */
     public async getMessagesFromInbox(authorization: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Message>>> {
         return MessagesApiFp(this.configuration).getMessagesFromInbox(authorization, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {string} authorization 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApi
+     */
+    public async getMessagesFromOutbox(authorization: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Message>>> {
+        return MessagesApiFp(this.configuration).getMessagesFromOutbox(authorization, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 
