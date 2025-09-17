@@ -19,6 +19,7 @@ export * from './message';
 export * from './news';
 export * from './omit-user-ext-ratings-count-or-screenshot-count_';
 export * from './permission';
+export * from './pick-auth-response-exclude-keyof-auth-response-email-or-banned-or-phash2-or-is-admin_';
 export * from './pick-game-name-or-url-or-url-spdrn-or-author-or-collab-or-date-created-or-owner-id_';
 export * from './pick-user-ext-exclude-keyof-user-ext-ratings-count-or-screenshot-count_';
 export * from './rating';
