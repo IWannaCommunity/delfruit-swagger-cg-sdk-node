@@ -21,11 +21,13 @@ import { APIError } from '../models';
 import { Badge } from '../models';
 import { EditUserPermissionsParam } from '../models';
 import { InlineResponse2001 } from '../models';
+import { KeysToCamelCaseUserCanQueryResult_ } from '../models';
 import { OmitUserExtRatingsCountOrScreenshotCount_ } from '../models';
+import { PartialUserCan_ } from '../models';
 import { Permission } from '../models';
 import { Review } from '../models';
+import { UserCan } from '../models';
 import { UserExt } from '../models';
-import { UserPermissions } from '../models';
 import { UserRegistration } from '../models';
 /**
  * UsersApi - axios parameter creator
@@ -360,6 +362,54 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * 
          * @param {number} uid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUsersCan: async (uid: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'uid' is not null or undefined
+            if (uid === null || uid === undefined) {
+                throw new RequiredError('uid','Required parameter uid was null or undefined when calling getUsersCan.');
+            }
+            const localVarPath = `/users/{uid}/can`
+                .replace(`{${"uid"}}`, encodeURIComponent(String(uid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} uid 
          * @param {number} [page] 
          * @param {number} [limit] 
          * @param {*} [options] Override http request option.
@@ -656,6 +706,63 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
+         * @param {PartialUserCan_} body 
+         * @param {number} uid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        patchUserCan: async (body: PartialUserCan_, uid: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new RequiredError('body','Required parameter body was null or undefined when calling patchUserCan.');
+            }
+            // verify required parameter 'uid' is not null or undefined
+            if (uid === null || uid === undefined) {
+                throw new RequiredError('uid','Required parameter uid was null or undefined when calling patchUserCan.');
+            }
+            const localVarPath = `/users/{uid}/can`
+                .replace(`{${"uid"}}`, encodeURIComponent(String(uid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {number} uid 
          * @param {Permission} pid 
          * @param {EditUserPermissionsParam} [body] 
@@ -926,6 +1033,19 @@ export const UsersApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {number} uid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUsersCan(uid: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<KeysToCamelCaseUserCanQueryResult_>>> {
+            const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).getUsersCan(uid, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @param {number} uid 
          * @param {number} [page] 
          * @param {number} [limit] 
          * @param {*} [options] Override http request option.
@@ -944,7 +1064,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUsersPermissions(uid: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<UserPermissions>>> {
+        async getUsersPermissions(uid: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Permission>>>> {
             const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).getUsersPermissions(uid, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -1000,6 +1120,20 @@ export const UsersApiFp = function(configuration?: Configuration) {
          */
         async patchUser(body: any, authorization: string, id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<any>>> {
             const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).patchUser(body, authorization, id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @param {PartialUserCan_} body 
+         * @param {number} uid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async patchUserCan(body: PartialUserCan_, uid: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<UserCan>>> {
+            const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).patchUserCan(body, uid, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1132,6 +1266,15 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
         /**
          * 
          * @param {number} uid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUsersCan(uid: number, options?: AxiosRequestConfig): Promise<AxiosResponse<KeysToCamelCaseUserCanQueryResult_>> {
+            return UsersApiFp(configuration).getUsersCan(uid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} uid 
          * @param {number} [page] 
          * @param {number} [limit] 
          * @param {*} [options] Override http request option.
@@ -1146,7 +1289,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUsersPermissions(uid: number, options?: AxiosRequestConfig): Promise<AxiosResponse<UserPermissions>> {
+        async getUsersPermissions(uid: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Permission>>> {
             return UsersApiFp(configuration).getUsersPermissions(uid, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1190,6 +1333,16 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          */
         async patchUser(body: any, authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<any>> {
             return UsersApiFp(configuration).patchUser(body, authorization, id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {PartialUserCan_} body 
+         * @param {number} uid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async patchUserCan(body: PartialUserCan_, uid: number, options?: AxiosRequestConfig): Promise<AxiosResponse<UserCan>> {
+            return UsersApiFp(configuration).patchUserCan(body, uid, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -1313,6 +1466,16 @@ export class UsersApi extends BaseAPI {
     /**
      * 
      * @param {number} uid 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public async getUsersCan(uid: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<KeysToCamelCaseUserCanQueryResult_>> {
+        return UsersApiFp(this.configuration).getUsersCan(uid, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {number} uid 
      * @param {number} [page] 
      * @param {number} [limit] 
      * @param {*} [options] Override http request option.
@@ -1329,7 +1492,7 @@ export class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    public async getUsersPermissions(uid: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<UserPermissions>> {
+    public async getUsersPermissions(uid: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Permission>>> {
         return UsersApiFp(this.configuration).getUsersPermissions(uid, options).then((request) => request(this.axios, this.basePath));
     }
     /**
@@ -1376,6 +1539,17 @@ export class UsersApi extends BaseAPI {
      */
     public async patchUser(body: any, authorization: string, id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<any>> {
         return UsersApiFp(this.configuration).patchUser(body, authorization, id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {PartialUserCan_} body 
+     * @param {number} uid 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public async patchUserCan(body: PartialUserCan_, uid: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<UserCan>> {
+        return UsersApiFp(this.configuration).patchUserCan(body, uid, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * 
