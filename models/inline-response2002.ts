@@ -16,13 +16,7 @@
  * 
  *
  * @export
- * @interface InlineResponse200
+ * @interface InlineResponse2002
  */
-export interface InlineResponse200 {
-
-    /**
-     * @type {number}
-     * @memberof InlineResponse200
-     */
-    count: number;
+export interface InlineResponse2002 {
 }

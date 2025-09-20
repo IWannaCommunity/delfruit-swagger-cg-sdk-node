@@ -20,7 +20,7 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 import { APIError } from '../models';
 import { Badge } from '../models';
 import { EditUserPermissionsParam } from '../models';
-import { InlineResponse2001 } from '../models';
+import { InlineResponse2002 } from '../models';
 import { KeysToCamelCaseUserCanQueryResult_ } from '../models';
 import { OmitUserExtRatingsCountOrScreenshotCount_ } from '../models';
 import { PartialUserCan_ } from '../models';
@@ -989,7 +989,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserFollow(authorization: string, followerId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse2001>>> {
+        async getUserFollow(authorization: string, followerId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse2002>>> {
             const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).getUserFollow(authorization, followerId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -1234,7 +1234,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getUserFollow(authorization: string, followerId: number, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2001>> {
+        async getUserFollow(authorization: string, followerId: number, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2002>> {
             return UsersApiFp(configuration).getUserFollow(authorization, followerId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1432,7 +1432,7 @@ export class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    public async getUserFollow(authorization: string, followerId: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse2001>> {
+    public async getUserFollow(authorization: string, followerId: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse2002>> {
         return UsersApiFp(this.configuration).getUserFollow(authorization, followerId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
