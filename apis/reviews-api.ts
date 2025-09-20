@@ -18,6 +18,7 @@ import { Configuration } from '../configuration';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { APIError } from '../models';
+import { InlineResponse200 } from '../models';
 import { Review } from '../models';
 /**
  * ReviewsApi - axios parameter creator
@@ -168,6 +169,40 @@ export const ReviewsApiAxiosParamCreator = function (configuration?: Configurati
             }
             const localVarPath = `/reviews/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get Review Count
+         * @summary Get Review Count
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getReviewCount: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/reviews/count`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -599,6 +634,19 @@ export const ReviewsApiFp = function(configuration?: Configuration) {
             };
         },
         /**
+         * Get Review Count
+         * @summary Get Review Count
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getReviewCount(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse200>>> {
+            const localVarAxiosArgs = await ReviewsApiAxiosParamCreator(configuration).getReviewCount(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * Returns whether a user likes a specific review. (User/Admin Only)
          * @summary Like Check for User (User/Admin Only)
          * @param {string} authorization 
@@ -732,6 +780,15 @@ export const ReviewsApiFactory = function (configuration?: Configuration, basePa
             return ReviewsApiFp(configuration).getReview(id, options).then((request) => request(axios, basePath));
         },
         /**
+         * Get Review Count
+         * @summary Get Review Count
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getReviewCount(options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse200>> {
+            return ReviewsApiFp(configuration).getReviewCount(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Returns whether a user likes a specific review. (User/Admin Only)
          * @summary Like Check for User (User/Admin Only)
          * @param {string} authorization 
@@ -847,6 +904,16 @@ export class ReviewsApi extends BaseAPI {
      */
     public async getReview(id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Review>> {
         return ReviewsApiFp(this.configuration).getReview(id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Get Review Count
+     * @summary Get Review Count
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReviewsApi
+     */
+    public async getReviewCount(options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse200>> {
+        return ReviewsApiFp(this.configuration).getReviewCount(options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Returns whether a user likes a specific review. (User/Admin Only)
