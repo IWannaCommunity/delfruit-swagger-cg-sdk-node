@@ -1559,12 +1559,232 @@ export const GamesApiFactory = function (configuration?: Configuration, basePath
 };
 
 /**
+ * GamesApi - interface
+ * @export
+ * @interface GamesApi
+ */
+export interface GamesApiInterface {
+    /**
+     * Remove Game. This is idempotent - repeated deletions of the same game have no effect.
+     * @summary Remove Game (Admin Only)
+     * @param {string} authorization 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GamesApiInterface
+     */
+    async deleteGame(authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse204>>;
+
+    /**
+     * Get Game
+     * @summary Get Game
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GamesApiInterface
+     */
+    async getGame(id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Game>>;
+
+    /**
+     * Get Game
+     * @summary Get Game
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GamesApiInterface
+     */
+    async getGameCompositeAll(id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<GameExt>>;
+
+    /**
+     * Get Game Count
+     * @summary Get Game Count
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GamesApiInterface
+     */
+    async getGameCount(options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse200>>;
+
+    /**
+     * Get Ratings for Game
+     * @summary Get Ratings for Game
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GamesApiInterface
+     */
+    async getGameRatings(id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Rating>>;
+
+    /**
+     * Get Reviews for Game
+     * @summary Get Reviews for Game
+     * @param {number} id 
+     * @param {number} [byUserId] 
+     * @param {boolean} [includeOwnerReview] 
+     * @param {boolean} [textReviewsFirst] 
+     * @param {number} [page] 
+     * @param {number} [limit] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GamesApiInterface
+     */
+    async getGameReviews(id: number, byUserId?: number, includeOwnerReview?: boolean, textReviewsFirst?: boolean, page?: number, limit?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Review>>>;
+
+    /**
+     * Get Screenshots for Game
+     * @summary Get Screenshots for Game
+     * @param {number} id 
+     * @param {string} [authorization] 
+     * @param {boolean} [approved] 
+     * @param {number} [page] 
+     * @param {number} [limit] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GamesApiInterface
+     */
+    async getGameScreenshot(id: number, authorization?: string, approved?: boolean, page?: number, limit?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Screenshot>>>;
+
+    /**
+     * Get Tags Associated to Game
+     * @summary Get Tags Associated to Game
+     * @param {number} id 
+     * @param {number} [userId] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GamesApiInterface
+     */
+    async getGameTags(id: number, userId?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2001>>;
+
+    /**
+     * Game List
+     * @summary Game List
+     * @param {string} [authorization] 
+     * @param {string} [q] 
+     * @param {number} [id] 
+     * @param {boolean} [removed] 
+     * @param {string} [name] 
+     * @param {string} [nameStartsWith] 
+     * @param {string} [nameExp] 
+     * @param {string} [tags] 
+     * @param {string} [author] 
+     * @param {number} [ownerUserId] 
+     * @param {boolean} [hasDownload] 
+     * @param {Date} [createdFrom] 
+     * @param {Date} [createdTo] 
+     * @param {number} [clearedByUserId] 
+     * @param {number} [reviewedByUserId] 
+     * @param {number} [ratingFrom] 
+     * @param {number} [ratingTo] 
+     * @param {number} [difficultyFrom] 
+     * @param {number} [difficultyTo] 
+     * @param {number} [page] 
+     * @param {number} [limit] 
+     * @param {string} [orderCol] 
+     * @param {string} [orderDir] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GamesApiInterface
+     */
+    async getGames(authorization?: string, q?: string, id?: number, removed?: boolean, name?: string, nameStartsWith?: string, nameExp?: string, tags?: string, author?: string, ownerUserId?: number, hasDownload?: boolean, createdFrom?: Date, createdTo?: Date, clearedByUserId?: number, reviewedByUserId?: number, ratingFrom?: number, ratingTo?: number, difficultyFrom?: number, difficultyTo?: number, page?: number, limit?: number, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Game>>>;
+
+    /**
+     * Game List
+     * @summary Game List
+     * @param {string} [authorization] 
+     * @param {string} [q] 
+     * @param {number} [id] 
+     * @param {boolean} [removed] 
+     * @param {string} [name] 
+     * @param {string} [tags] 
+     * @param {string} [author] 
+     * @param {number} [ownerUserId] 
+     * @param {boolean} [hasDownload] 
+     * @param {Date} [createdFrom] 
+     * @param {Date} [createdTo] 
+     * @param {number} [clearedByUserId] 
+     * @param {number} [reviewedByUserId] 
+     * @param {number} [ratingFrom] 
+     * @param {number} [ratingTo] 
+     * @param {number} [difficultyFrom] 
+     * @param {number} [difficultyTo] 
+     * @param {number} [page] 
+     * @param {number} [limit] 
+     * @param {string} [orderCol] 
+     * @param {string} [orderDir] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GamesApiInterface
+     */
+    async getGamesWithRatings(authorization?: string, q?: string, id?: number, removed?: boolean, name?: string, tags?: string, author?: string, ownerUserId?: number, hasDownload?: boolean, createdFrom?: Date, createdTo?: Date, clearedByUserId?: number, reviewedByUserId?: number, ratingFrom?: number, ratingTo?: number, difficultyFrom?: number, difficultyTo?: number, page?: number, limit?: number, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<GameExt>>>;
+
+    /**
+     * Update Game (Admin Only)
+     * @summary Update Game (Admin Only)
+     * @param {Game} body 
+     * @param {string} authorization 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GamesApiInterface
+     */
+    async patchGame(body: Game, authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Game>>;
+
+    /**
+     * Add Game (Admin Only)
+     * @summary Add Game (Admin Only)
+     * @param {PickGameNameOrUrlOrUrlSpdrnOrAuthorOrCollabOrDateCreatedOrOwnerId_} body 
+     * @param {string} authorization 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GamesApiInterface
+     */
+    async postGame(body: PickGameNameOrUrlOrUrlSpdrnOrAuthorOrCollabOrDateCreatedOrOwnerId_, authorization: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Game>>;
+
+    /**
+     * Add Screenshot for Game (User/Admin Only)
+     * @summary Add Screenshot for Game (User/Admin Only)
+     * @param {string} description 
+     * @param {Blob} screenshot 
+     * @param {string} authorization 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GamesApiInterface
+     */
+    async postGameScreenshotForm(description: string, screenshot: Blob, authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Screenshot>>;
+
+    /**
+     * Clears and sets an array of tag IDs for a game on a user-by-user basis.
+     * @summary Set Tags Associated to Game
+     * @param {Array<any>} body 
+     * @param {string} authorization 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GamesApiInterface
+     */
+    async postGameSetTags(body: Array<any>, authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2001>>;
+
+    /**
+     * Add Review for Game (User/Admin Only)
+     * @summary Add Review for Game (User/Admin Only)
+     * @param {Review} body 
+     * @param {string} authorization 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof GamesApiInterface
+     */
+    async putGameReview(body: Review, authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Review>>;
+
+}
+
+/**
  * GamesApi - object-oriented interface
  * @export
  * @class GamesApi
  * @extends {BaseAPI}
  */
-export class GamesApi extends BaseAPI {
+export class GamesApi extends BaseAPI implements GamesApiInterface {
     /**
      * Remove Game. This is idempotent - repeated deletions of the same game have no effect.
      * @summary Remove Game (Admin Only)

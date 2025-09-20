@@ -503,12 +503,88 @@ export const CompositeApiFactory = function (configuration?: Configuration, base
 };
 
 /**
+ * CompositeApi - interface
+ * @export
+ * @interface CompositeApi
+ */
+export interface CompositeApiInterface {
+    /**
+     * Get Game
+     * @summary Get Game
+     * @param {string} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CompositeApiInterface
+     */
+    async getGameCompositeAll(id: string, options?: AxiosRequestConfig): Promise<AxiosResponse<GameExt>>;
+
+    /**
+     * Game List
+     * @summary Game List
+     * @param {string} [authorization] 
+     * @param {string} [q] 
+     * @param {number} [id] 
+     * @param {boolean} [removed] 
+     * @param {string} [name] 
+     * @param {string} [tags] 
+     * @param {string} [author] 
+     * @param {number} [ownerUserId] 
+     * @param {boolean} [hasDownload] 
+     * @param {Date} [createdFrom] 
+     * @param {Date} [createdTo] 
+     * @param {number} [clearedByUserId] 
+     * @param {number} [reviewedByUserId] 
+     * @param {number} [ratingFrom] 
+     * @param {number} [ratingTo] 
+     * @param {number} [difficultyFrom] 
+     * @param {number} [difficultyTo] 
+     * @param {number} [page] 
+     * @param {number} [limit] 
+     * @param {string} [orderCol] 
+     * @param {string} [orderDir] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CompositeApiInterface
+     */
+    async getGamesWithRatings(authorization?: string, q?: string, id?: number, removed?: boolean, name?: string, tags?: string, author?: string, ownerUserId?: number, hasDownload?: boolean, createdFrom?: Date, createdTo?: Date, clearedByUserId?: number, reviewedByUserId?: number, ratingFrom?: number, ratingTo?: number, difficultyFrom?: number, difficultyTo?: number, page?: number, limit?: number, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<GameExt>>>;
+
+    /**
+     * Get User
+     * @summary Get User
+     * @param {number} id 
+     * @param {string} [authorization] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CompositeApiInterface
+     */
+    async getUserCompositeAll(id: number, authorization?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<UserExt>>;
+
+    /**
+     * User List
+     * @summary User List
+     * @param {string} [authorization] 
+     * @param {string} [name] 
+     * @param {boolean} [following] 
+     * @param {boolean} [banned] 
+     * @param {number} [page] 
+     * @param {number} [limit] 
+     * @param {string} [orderCol] 
+     * @param {string} [orderDir] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof CompositeApiInterface
+     */
+    async getUsersWithReviewsCount(authorization?: string, name?: string, following?: boolean, banned?: boolean, page?: number, limit?: number, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<OmitUserExtRatingsCountOrScreenshotCount_>>>;
+
+}
+
+/**
  * CompositeApi - object-oriented interface
  * @export
  * @class CompositeApi
  * @extends {BaseAPI}
  */
-export class CompositeApi extends BaseAPI {
+export class CompositeApi extends BaseAPI implements CompositeApiInterface {
     /**
      * Get Game
      * @summary Get Game

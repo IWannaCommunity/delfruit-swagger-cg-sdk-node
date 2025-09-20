@@ -125,12 +125,31 @@ export const APIApiFactory = function (configuration?: Configuration, basePath?:
 };
 
 /**
+ * APIApi - interface
+ * @export
+ * @interface APIApi
+ */
+export interface APIApiInterface {
+    /**
+     * Retrieves a list of API users.
+     * @summary API User List.
+     * @param {number} [page] 
+     * @param {number} [limit] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof APIApiInterface
+     */
+    async getUsers(page?: number, limit?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<ApiUser>>>;
+
+}
+
+/**
  * APIApi - object-oriented interface
  * @export
  * @class APIApi
  * @extends {BaseAPI}
  */
-export class APIApi extends BaseAPI {
+export class APIApi extends BaseAPI implements APIApiInterface {
     /**
      * Retrieves a list of API users.
      * @summary API User List.

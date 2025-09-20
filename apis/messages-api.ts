@@ -357,12 +357,58 @@ export const MessagesApiFactory = function (configuration?: Configuration, baseP
 };
 
 /**
+ * MessagesApi - interface
+ * @export
+ * @interface MessagesApi
+ */
+export interface MessagesApiInterface {
+    /**
+     * 
+     * @param {string} authorization 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApiInterface
+     */
+    async getMessagesFromInbox(authorization: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Message>>>;
+
+    /**
+     * 
+     * @param {string} authorization 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApiInterface
+     */
+    async getMessagesFromOutbox(authorization: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Message>>>;
+
+    /**
+     * 
+     * @param {string} authorization 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApiInterface
+     */
+    async getMessagesFromThread(authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Message>>>;
+
+    /**
+     * 
+     * @param {Message} body 
+     * @param {string} authorization 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApiInterface
+     */
+    async postMessage(body: Message, authorization: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
+
+}
+
+/**
  * MessagesApi - object-oriented interface
  * @export
  * @class MessagesApi
  * @extends {BaseAPI}
  */
-export class MessagesApi extends BaseAPI {
+export class MessagesApi extends BaseAPI implements MessagesApiInterface {
     /**
      * 
      * @param {string} authorization 

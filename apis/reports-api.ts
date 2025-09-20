@@ -404,12 +404,68 @@ export const ReportsApiFactory = function (configuration?: Configuration, basePa
 };
 
 /**
+ * ReportsApi - interface
+ * @export
+ * @interface ReportsApi
+ */
+export interface ReportsApiInterface {
+    /**
+     * Get Report (Admin Only)
+     * @summary Get Report (Admin Only)
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportsApiInterface
+     */
+    async getReport(id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Report>>;
+
+    /**
+     * Report List (Admin Only)
+     * @summary Repost List (Admin Only)
+     * @param {number} [page] 
+     * @param {number} [limit] 
+     * @param {string} [orderCol] 
+     * @param {string} [orderDir] 
+     * @param {number} [id] 
+     * @param {string} [type] 
+     * @param {boolean} [answered] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportsApiInterface
+     */
+    async getReports(page?: number, limit?: number, orderCol?: string, orderDir?: string, id?: number, type?: string, answered?: boolean, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Report>>>;
+
+    /**
+     * Allows admins to update the report, such as marking it as resolved.
+     * @summary Update Report (Admin Only)
+     * @param {Report} body 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportsApiInterface
+     */
+    async patchReport(body: Report, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Report>>;
+
+    /**
+     * Allows a user to submit a report.
+     * @summary Submit Report (User/Admin Only)
+     * @param {Report} body 
+     * @param {string} authorization 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportsApiInterface
+     */
+    async postReport(body: Report, authorization: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Report>>;
+
+}
+
+/**
  * ReportsApi - object-oriented interface
  * @export
  * @class ReportsApi
  * @extends {BaseAPI}
  */
-export class ReportsApi extends BaseAPI {
+export class ReportsApi extends BaseAPI implements ReportsApiInterface {
     /**
      * Get Report (Admin Only)
      * @summary Get Report (Admin Only)

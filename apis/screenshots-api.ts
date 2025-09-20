@@ -605,12 +605,96 @@ export const ScreenshotsApiFactory = function (configuration?: Configuration, ba
 };
 
 /**
+ * ScreenshotsApi - interface
+ * @export
+ * @interface ScreenshotsApi
+ */
+export interface ScreenshotsApiInterface {
+    /**
+     * 
+     * @param {string} authorization 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ScreenshotsApiInterface
+     */
+    async deleteScreenshot(authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<APIError>>;
+
+    /**
+     * Get Screenshots for Game
+     * @summary Get Screenshots for Game
+     * @param {number} id 
+     * @param {string} [authorization] 
+     * @param {boolean} [approved] 
+     * @param {number} [page] 
+     * @param {number} [limit] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ScreenshotsApiInterface
+     */
+    async getGameScreenshot(id: number, authorization?: string, approved?: boolean, page?: number, limit?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Screenshot>>>;
+
+    /**
+     * Get Screenshot
+     * @summary Get Screenshot
+     * @param {number} id 
+     * @param {string} [authorization] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ScreenshotsApiInterface
+     */
+    async getScreenshot(id: number, authorization?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Screenshot>>;
+
+    /**
+     * Get List of Screenshots
+     * @summary Get List of Screenshots
+     * @param {string} [authorization] 
+     * @param {number} [gameId] 
+     * @param {boolean} [removed] 
+     * @param {boolean} [approved] 
+     * @param {number} [page] 
+     * @param {number} [limit] 
+     * @param {number} [id] 
+     * @param {number} [addedById] 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ScreenshotsApiInterface
+     */
+    async getScreenshots(authorization?: string, gameId?: number, removed?: boolean, approved?: boolean, page?: number, limit?: number, id?: number, addedById?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Screenshot>>>;
+
+    /**
+     * 
+     * @param {Screenshot} body 
+     * @param {string} authorization 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ScreenshotsApiInterface
+     */
+    async patchScreenshot(body: Screenshot, authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Screenshot>>;
+
+    /**
+     * Add Screenshot for Game (User/Admin Only)
+     * @summary Add Screenshot for Game (User/Admin Only)
+     * @param {string} description 
+     * @param {Blob} screenshot 
+     * @param {string} authorization 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ScreenshotsApiInterface
+     */
+    async postGameScreenshotForm(description: string, screenshot: Blob, authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Screenshot>>;
+
+}
+
+/**
  * ScreenshotsApi - object-oriented interface
  * @export
  * @class ScreenshotsApi
  * @extends {BaseAPI}
  */
-export class ScreenshotsApi extends BaseAPI {
+export class ScreenshotsApi extends BaseAPI implements ScreenshotsApiInterface {
     /**
      * 
      * @param {string} authorization 
