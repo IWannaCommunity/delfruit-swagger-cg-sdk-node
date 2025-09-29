@@ -13,16 +13,10 @@
  */
 
  /**
- * 
+ * The **`URL`** interface is used to parse, construct, normalize, and encode URL.  [MDN Reference](https://developer.mozilla.org/docs/Web/API/URL)
  *
  * @export
- * @interface InlineResponse200
+ * @interface URL
  */
-export interface InlineResponse200 {
-
-    /**
-     * @type {boolean}
-     * @memberof InlineResponse200
-     */
-    following: boolean;
+export interface URL {
 }

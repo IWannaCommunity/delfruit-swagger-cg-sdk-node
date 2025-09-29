@@ -16,13 +16,13 @@
  * 
  *
  * @export
- * @interface InlineResponse200
+ * @interface UserRegistrationResponse
  */
-export interface InlineResponse200 {
+export interface UserRegistrationResponse {
 
     /**
-     * @type {boolean}
-     * @memberof InlineResponse200
+     * @type {string}
+     * @memberof UserRegistrationResponse
      */
-    following: boolean;
+    token: string;
 }

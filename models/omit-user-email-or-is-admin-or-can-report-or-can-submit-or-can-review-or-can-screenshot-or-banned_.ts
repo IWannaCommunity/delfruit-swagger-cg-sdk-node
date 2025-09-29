@@ -16,13 +16,7 @@
  * 
  *
  * @export
- * @interface InlineResponse200
+ * @interface OmitUserEmailOrIsAdminOrCanReportOrCanSubmitOrCanReviewOrCanScreenshotOrBanned_
  */
-export interface InlineResponse200 {
-
-    /**
-     * @type {boolean}
-     * @memberof InlineResponse200
-     */
-    following: boolean;
+export interface OmitUserEmailOrIsAdminOrCanReportOrCanSubmitOrCanReviewOrCanScreenshotOrBanned_ {
 }

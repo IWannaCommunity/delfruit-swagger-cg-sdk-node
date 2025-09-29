@@ -21,6 +21,12 @@
 export interface PickAuthResponseExcludeKeyofAuthResponseEmailOrBannedOrPhash2OrIsAdmin_ {
 
     /**
+     * @type {number}
+     * @memberof PickAuthResponseExcludeKeyofAuthResponseEmailOrBannedOrPhash2OrIsAdmin_
+     */
+    id: number;
+
+    /**
      * @type {string}
      * @memberof PickAuthResponseExcludeKeyofAuthResponseEmailOrBannedOrPhash2OrIsAdmin_
      */
@@ -33,12 +39,6 @@ export interface PickAuthResponseExcludeKeyofAuthResponseEmailOrBannedOrPhash2Or
     dateCreated: string;
 
     /**
-     * @type {number}
-     * @memberof PickAuthResponseExcludeKeyofAuthResponseEmailOrBannedOrPhash2OrIsAdmin_
-     */
-    id: number;
-
-    /**
      * @type {string}
      * @memberof PickAuthResponseExcludeKeyofAuthResponseEmailOrBannedOrPhash2OrIsAdmin_
      */
@@ -48,13 +48,13 @@ export interface PickAuthResponseExcludeKeyofAuthResponseEmailOrBannedOrPhash2Or
      * @type {string}
      * @memberof PickAuthResponseExcludeKeyofAuthResponseEmailOrBannedOrPhash2OrIsAdmin_
      */
-    youtubeLink?: string;
+    nicoLink?: string;
 
     /**
      * @type {string}
      * @memberof PickAuthResponseExcludeKeyofAuthResponseEmailOrBannedOrPhash2OrIsAdmin_
      */
-    nicoLink?: string;
+    youtubeLink?: string;
 
     /**
      * @type {string}

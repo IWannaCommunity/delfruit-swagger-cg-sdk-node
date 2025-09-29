@@ -30,6 +30,12 @@ export interface PickGameNameOrUrlOrUrlSpdrnOrAuthorOrCollabOrDateCreatedOrOwner
      * @type {string}
      * @memberof PickGameNameOrUrlOrUrlSpdrnOrAuthorOrCollabOrDateCreatedOrOwnerId_
      */
+    dateCreated?: string;
+
+    /**
+     * @type {string}
+     * @memberof PickGameNameOrUrlOrUrlSpdrnOrAuthorOrCollabOrDateCreatedOrOwnerId_
+     */
     url?: string;
 
     /**
@@ -49,12 +55,6 @@ export interface PickGameNameOrUrlOrUrlSpdrnOrAuthorOrCollabOrDateCreatedOrOwner
      * @memberof PickGameNameOrUrlOrUrlSpdrnOrAuthorOrCollabOrDateCreatedOrOwnerId_
      */
     collab?: boolean;
-
-    /**
-     * @type {string}
-     * @memberof PickGameNameOrUrlOrUrlSpdrnOrAuthorOrCollabOrDateCreatedOrOwnerId_
-     */
-    dateCreated?: string;
 
     /**
      * @type {string}

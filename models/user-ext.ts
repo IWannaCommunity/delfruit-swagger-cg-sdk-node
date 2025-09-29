@@ -21,6 +21,12 @@
 export interface UserExt {
 
     /**
+     * @type {number}
+     * @memberof UserExt
+     */
+    id: number;
+
+    /**
      * @type {string}
      * @memberof UserExt
      */
@@ -33,12 +39,6 @@ export interface UserExt {
     dateCreated: string;
 
     /**
-     * @type {number}
-     * @memberof UserExt
-     */
-    id: number;
-
-    /**
      * @type {string}
      * @memberof UserExt
      */
@@ -48,13 +48,13 @@ export interface UserExt {
      * @type {string}
      * @memberof UserExt
      */
-    youtubeLink?: string;
+    nicoLink?: string;
 
     /**
      * @type {string}
      * @memberof UserExt
      */
-    nicoLink?: string;
+    youtubeLink?: string;
 
     /**
      * @type {string}

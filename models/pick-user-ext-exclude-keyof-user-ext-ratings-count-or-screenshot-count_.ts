@@ -21,6 +21,12 @@
 export interface PickUserExtExcludeKeyofUserExtRatingsCountOrScreenshotCount_ {
 
     /**
+     * @type {number}
+     * @memberof PickUserExtExcludeKeyofUserExtRatingsCountOrScreenshotCount_
+     */
+    id: number;
+
+    /**
      * @type {string}
      * @memberof PickUserExtExcludeKeyofUserExtRatingsCountOrScreenshotCount_
      */
@@ -33,12 +39,6 @@ export interface PickUserExtExcludeKeyofUserExtRatingsCountOrScreenshotCount_ {
     dateCreated: string;
 
     /**
-     * @type {number}
-     * @memberof PickUserExtExcludeKeyofUserExtRatingsCountOrScreenshotCount_
-     */
-    id: number;
-
-    /**
      * @type {string}
      * @memberof PickUserExtExcludeKeyofUserExtRatingsCountOrScreenshotCount_
      */
@@ -48,13 +48,13 @@ export interface PickUserExtExcludeKeyofUserExtRatingsCountOrScreenshotCount_ {
      * @type {string}
      * @memberof PickUserExtExcludeKeyofUserExtRatingsCountOrScreenshotCount_
      */
-    youtubeLink?: string;
+    nicoLink?: string;
 
     /**
      * @type {string}
      * @memberof PickUserExtExcludeKeyofUserExtRatingsCountOrScreenshotCount_
      */
-    nicoLink?: string;
+    youtubeLink?: string;
 
     /**
      * @type {string}

@@ -20,8 +20,8 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 import { APIError } from '../models';
 import { Game } from '../models';
 import { GameExt } from '../models';
-import { InlineResponse200 } from '../models';
 import { InlineResponse2001 } from '../models';
+import { InlineResponse2002 } from '../models';
 import { InlineResponse204 } from '../models';
 import { PickGameNameOrUrlOrUrlSpdrnOrAuthorOrCollabOrDateCreatedOrOwnerId_ } from '../models';
 import { Rating } from '../models';
@@ -1111,7 +1111,7 @@ export const GamesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getGameCount(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse200>>> {
+        async getGameCount(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse2001>>> {
             const localVarAxiosArgs = await GamesApiAxiosParamCreator(configuration).getGameCount(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -1177,7 +1177,7 @@ export const GamesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getGameTags(id: number, userId?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse2001>>> {
+        async getGameTags(id: number, userId?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse2002>>> {
             const localVarAxiosArgs = await GamesApiAxiosParamCreator(configuration).getGameTags(id, userId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -1311,7 +1311,7 @@ export const GamesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postGameSetTags(body: Array<any>, authorization: string, id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse2001>>> {
+        async postGameSetTags(body: Array<any>, authorization: string, id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse2002>>> {
             const localVarAxiosArgs = await GamesApiAxiosParamCreator(configuration).postGameSetTags(body, authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -1380,7 +1380,7 @@ export const GamesApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getGameCount(options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse200>> {
+        async getGameCount(options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2001>> {
             return GamesApiFp(configuration).getGameCount(options).then((request) => request(axios, basePath));
         },
         /**
@@ -1430,7 +1430,7 @@ export const GamesApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getGameTags(id: number, userId?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2001>> {
+        async getGameTags(id: number, userId?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2002>> {
             return GamesApiFp(configuration).getGameTags(id, userId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1540,7 +1540,7 @@ export const GamesApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postGameSetTags(body: Array<any>, authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2001>> {
+        async postGameSetTags(body: Array<any>, authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2002>> {
             return GamesApiFp(configuration).postGameSetTags(body, authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1602,7 +1602,7 @@ export interface GamesApiInterface {
      * @throws {RequiredError}
      * @memberof GamesApiInterface
      */
-    async getGameCount(options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse200>>;
+    async getGameCount(options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2001>>;
 
     /**
      * Get Ratings for Game
@@ -1652,7 +1652,7 @@ export interface GamesApiInterface {
      * @throws {RequiredError}
      * @memberof GamesApiInterface
      */
-    async getGameTags(id: number, userId?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2001>>;
+    async getGameTags(id: number, userId?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2002>>;
 
     /**
      * Game List
@@ -1762,7 +1762,7 @@ export interface GamesApiInterface {
      * @throws {RequiredError}
      * @memberof GamesApiInterface
      */
-    async postGameSetTags(body: Array<any>, authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2001>>;
+    async postGameSetTags(body: Array<any>, authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2002>>;
 
     /**
      * Add Review for Game (User/Admin Only)
@@ -1826,7 +1826,7 @@ export class GamesApi extends BaseAPI implements GamesApiInterface {
      * @throws {RequiredError}
      * @memberof GamesApi
      */
-    public async getGameCount(options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse200>> {
+    public async getGameCount(options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse2001>> {
         return GamesApiFp(this.configuration).getGameCount(options).then((request) => request(this.axios, this.basePath));
     }
     /**
@@ -1880,7 +1880,7 @@ export class GamesApi extends BaseAPI implements GamesApiInterface {
      * @throws {RequiredError}
      * @memberof GamesApi
      */
-    public async getGameTags(id: number, userId?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse2001>> {
+    public async getGameTags(id: number, userId?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse2002>> {
         return GamesApiFp(this.configuration).getGameTags(id, userId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
@@ -1996,7 +1996,7 @@ export class GamesApi extends BaseAPI implements GamesApiInterface {
      * @throws {RequiredError}
      * @memberof GamesApi
      */
-    public async postGameSetTags(body: Array<any>, authorization: string, id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse2001>> {
+    public async postGameSetTags(body: Array<any>, authorization: string, id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse2002>> {
         return GamesApiFp(this.configuration).postGameSetTags(body, authorization, id, options).then((request) => request(this.axios, this.basePath));
     }
     /**

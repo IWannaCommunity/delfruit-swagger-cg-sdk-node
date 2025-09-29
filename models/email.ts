@@ -16,13 +16,7 @@
  * 
  *
  * @export
- * @interface InlineResponse200
+ * @interface Email
  */
-export interface InlineResponse200 {
-
-    /**
-     * @type {boolean}
-     * @memberof InlineResponse200
-     */
-    following: boolean;
+export interface Email {
 }

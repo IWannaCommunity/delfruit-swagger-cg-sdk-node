@@ -19,4 +19,10 @@
  * @interface InlineResponse2001
  */
 export interface InlineResponse2001 {
+
+    /**
+     * @type {number}
+     * @memberof InlineResponse2001
+     */
+    count: number;
 }
