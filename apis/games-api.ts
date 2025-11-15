@@ -23,7 +23,7 @@ import { GameExt } from '../models';
 import { InlineResponse2001 } from '../models';
 import { InlineResponse2002 } from '../models';
 import { InlineResponse204 } from '../models';
-import { PickGameNameOrUrlOrUrlSpdrnOrAuthorOrCollabOrDateCreatedOrOwnerId_ } from '../models';
+import { PostGameParams } from '../models';
 import { Rating } from '../models';
 import { Review } from '../models';
 import { Screenshot } from '../models';
@@ -541,11 +541,11 @@ export const GamesApiAxiosParamCreator = function (configuration?: Configuration
             }
 
             if (orderCol !== undefined) {
-                localVarQueryParameter['order_col'] = orderCol;
+                localVarQueryParameter['orderCol'] = orderCol;
             }
 
             if (orderDir !== undefined) {
-                localVarQueryParameter['order_dir'] = orderDir;
+                localVarQueryParameter['orderDir'] = orderDir;
             }
 
             if (authorization !== undefined && authorization !== null) {
@@ -781,12 +781,12 @@ export const GamesApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * Add Game (Admin Only)
          * @summary Add Game (Admin Only)
-         * @param {PickGameNameOrUrlOrUrlSpdrnOrAuthorOrCollabOrDateCreatedOrOwnerId_} body 
+         * @param {PostGameParams} body 
          * @param {string} authorization 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postGame: async (body: PickGameNameOrUrlOrUrlSpdrnOrAuthorOrCollabOrDateCreatedOrOwnerId_, authorization: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        postGame: async (body: PostGameParams, authorization: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling postGame.');
@@ -1273,12 +1273,12 @@ export const GamesApiFp = function(configuration?: Configuration) {
         /**
          * Add Game (Admin Only)
          * @summary Add Game (Admin Only)
-         * @param {PickGameNameOrUrlOrUrlSpdrnOrAuthorOrCollabOrDateCreatedOrOwnerId_} body 
+         * @param {PostGameParams} body 
          * @param {string} authorization 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postGame(body: PickGameNameOrUrlOrUrlSpdrnOrAuthorOrCollabOrDateCreatedOrOwnerId_, authorization: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Game>>> {
+        async postGame(body: PostGameParams, authorization: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Game>>> {
             const localVarAxiosArgs = await GamesApiAxiosParamCreator(configuration).postGame(body, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -1510,12 +1510,12 @@ export const GamesApiFactory = function (configuration?: Configuration, basePath
         /**
          * Add Game (Admin Only)
          * @summary Add Game (Admin Only)
-         * @param {PickGameNameOrUrlOrUrlSpdrnOrAuthorOrCollabOrDateCreatedOrOwnerId_} body 
+         * @param {PostGameParams} body 
          * @param {string} authorization 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postGame(body: PickGameNameOrUrlOrUrlSpdrnOrAuthorOrCollabOrDateCreatedOrOwnerId_, authorization: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Game>> {
+        async postGame(body: PostGameParams, authorization: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Game>> {
             return GamesApiFp(configuration).postGame(body, authorization, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1731,13 +1731,13 @@ export interface GamesApiInterface {
     /**
      * Add Game (Admin Only)
      * @summary Add Game (Admin Only)
-     * @param {PickGameNameOrUrlOrUrlSpdrnOrAuthorOrCollabOrDateCreatedOrOwnerId_} body 
+     * @param {PostGameParams} body 
      * @param {string} authorization 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GamesApiInterface
      */
-    async postGame(body: PickGameNameOrUrlOrUrlSpdrnOrAuthorOrCollabOrDateCreatedOrOwnerId_, authorization: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Game>>;
+    async postGame(body: PostGameParams, authorization: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Game>>;
 
     /**
      * Add Screenshot for Game (User/Admin Only)
@@ -1963,13 +1963,13 @@ export class GamesApi extends BaseAPI implements GamesApiInterface {
     /**
      * Add Game (Admin Only)
      * @summary Add Game (Admin Only)
-     * @param {PickGameNameOrUrlOrUrlSpdrnOrAuthorOrCollabOrDateCreatedOrOwnerId_} body 
+     * @param {PostGameParams} body 
      * @param {string} authorization 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GamesApi
      */
-    public async postGame(body: PickGameNameOrUrlOrUrlSpdrnOrAuthorOrCollabOrDateCreatedOrOwnerId_, authorization: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<Game>> {
+    public async postGame(body: PostGameParams, authorization: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<Game>> {
         return GamesApiFp(this.configuration).postGame(body, authorization, options).then((request) => request(this.axios, this.basePath));
     }
     /**
