@@ -67,4 +67,10 @@ export interface Review {
      * @memberof Review
      */
     removed?: boolean;
+
+    /**
+     * @type {Array<number>}
+     * @memberof Review
+     */
+    tags?: Array<number>;
 }
