@@ -130,8 +130,8 @@ export interface PartialPatchUserParamsAndUser_ {
     banned?: boolean;
 
     /**
-     * @type {Email}
+     * @type {string | Email}
      * @memberof PartialPatchUserParamsAndUser_
      */
-    email?: Email;
+    email?: string | Email;
 }

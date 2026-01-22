@@ -22,10 +22,10 @@ import { Email } from './email';
 export interface User {
 
     /**
-     * @type {Email}
+     * @type {string | Email}
      * @memberof User
      */
-    email?: Email;
+    email?: string | Email;
 
     /**
      * @type {boolean}
