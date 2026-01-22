@@ -111,30 +111,12 @@ export const RatingsApiFactory = function (configuration?: Configuration, basePa
 };
 
 /**
- * RatingsApi - interface
- * @export
- * @interface RatingsApi
- */
-export interface RatingsApiInterface {
-    /**
-     * Get Ratings for Game
-     * @summary Get Ratings for Game
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof RatingsApiInterface
-     */
-    async getGameRatings(id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Rating>>;
-
-}
-
-/**
  * RatingsApi - object-oriented interface
  * @export
  * @class RatingsApi
  * @extends {BaseAPI}
  */
-export class RatingsApi extends BaseAPI implements RatingsApiInterface {
+export class RatingsApi extends BaseAPI {
     /**
      * Get Ratings for Game
      * @summary Get Ratings for Game

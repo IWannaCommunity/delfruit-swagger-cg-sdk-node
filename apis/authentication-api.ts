@@ -314,60 +314,12 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
 };
 
 /**
- * AuthenticationApi - interface
- * @export
- * @interface AuthenticationApi
- */
-export interface AuthenticationApiInterface {
-    /**
-     * Should be called with the token the user received in their reset email. Generates a token after successful completion.
-     * @summary Finalize Password Reset
-     * @param {FinalizePassResetParams} [body] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AuthenticationApiInterface
-     */
-    async postFinalizePassReset(body?: FinalizePassResetParams, options?: AxiosRequestConfig): Promise<AxiosResponse<AuthResponse>>;
-
-    /**
-     * Login
-     * @summary Login
-     * @param {UserCredentials} body 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AuthenticationApiInterface
-     */
-    async postLogin(body: UserCredentials, options?: AxiosRequestConfig): Promise<AxiosResponse<AuthResponse>>;
-
-    /**
-     * Allows a user with a valid token to request a fresh token with a new expiration date. This should be invoked whenever the 'useExp' timestamp in the token payload has been exceeded.
-     * @summary Refresh Token
-     * @param {string} authorization 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AuthenticationApiInterface
-     */
-    async postRefresh(authorization: string, options?: AxiosRequestConfig): Promise<AxiosResponse<AuthResponse>>;
-
-    /**
-     * Request Password Reset
-     * @summary Request Password Reset
-     * @param {ResetRequestParams} body 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof AuthenticationApiInterface
-     */
-    async postResetRequest(body: ResetRequestParams, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
-
-}
-
-/**
  * AuthenticationApi - object-oriented interface
  * @export
  * @class AuthenticationApi
  * @extends {BaseAPI}
  */
-export class AuthenticationApi extends BaseAPI implements AuthenticationApiInterface {
+export class AuthenticationApi extends BaseAPI {
     /**
      * Should be called with the token the user received in their reset email. Generates a token after successful completion.
      * @summary Finalize Password Reset

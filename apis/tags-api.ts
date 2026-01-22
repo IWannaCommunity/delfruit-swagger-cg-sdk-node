@@ -199,41 +199,12 @@ export const TagsApiFactory = function (configuration?: Configuration, basePath?
 };
 
 /**
- * TagsApi - interface
- * @export
- * @interface TagsApi
- */
-export interface TagsApiInterface {
-    /**
-     * 
-     * @param {string} [q] 
-     * @param {number} [gameId] 
-     * @param {number} [userId] 
-     * @param {number} [tagId] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TagsApiInterface
-     */
-    async getTags(q?: string, gameId?: number, userId?: number, tagId?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<any>>>;
-
-    /**
-     * 
-     * @param {any} body 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TagsApiInterface
-     */
-    async postTag(body: any, options?: AxiosRequestConfig): Promise<AxiosResponse<any>>;
-
-}
-
-/**
  * TagsApi - object-oriented interface
  * @export
  * @class TagsApi
  * @extends {BaseAPI}
  */
-export class TagsApi extends BaseAPI implements TagsApiInterface {
+export class TagsApi extends BaseAPI {
     /**
      * 
      * @param {string} [q] 

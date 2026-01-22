@@ -409,68 +409,12 @@ export const NewsApiFactory = function (configuration?: Configuration, basePath?
 };
 
 /**
- * NewsApi - interface
- * @export
- * @interface NewsApi
- */
-export interface NewsApiInterface {
-    /**
-     * 
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof NewsApiInterface
-     */
-    async deleteNews(id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
-
-    /**
-     * 
-     * @param {number} [page] 
-     * @param {number} [limit] 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof NewsApiInterface
-     */
-    async getAllNews(page?: number, limit?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<News>>>;
-
-    /**
-     * 
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof NewsApiInterface
-     */
-    async getNews(id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<News>>;
-
-    /**
-     * 
-     * @param {News} body 
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof NewsApiInterface
-     */
-    async patchNews(body: News, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
-
-    /**
-     * 
-     * @param {News} body 
-     * @param {string} authorization 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof NewsApiInterface
-     */
-    async postNews(body: News, authorization: string, options?: AxiosRequestConfig): Promise<AxiosResponse<News>>;
-
-}
-
-/**
  * NewsApi - object-oriented interface
  * @export
  * @class NewsApi
  * @extends {BaseAPI}
  */
-export class NewsApi extends BaseAPI implements NewsApiInterface {
+export class NewsApi extends BaseAPI {
     /**
      * 
      * @param {number} id 

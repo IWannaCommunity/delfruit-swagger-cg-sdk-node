@@ -204,44 +204,12 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
 };
 
 /**
- * DefaultApi - interface
- * @export
- * @interface DefaultApi
- */
-export interface DefaultApiInterface {
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApiInterface
-     */
-    async getError(options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
-
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApiInterface
-     */
-    async getError2(options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
-
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof DefaultApiInterface
-     */
-    async getPing(options?: AxiosRequestConfig): Promise<AxiosResponse<string>>;
-
-}
-
-/**
  * DefaultApi - object-oriented interface
  * @export
  * @class DefaultApi
  * @extends {BaseAPI}
  */
-export class DefaultApi extends BaseAPI implements DefaultApiInterface {
+export class DefaultApi extends BaseAPI {
     /**
      * 
      * @param {*} [options] Override http request option.

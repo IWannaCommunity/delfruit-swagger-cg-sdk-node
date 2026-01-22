@@ -543,86 +543,12 @@ export const ListsApiFactory = function (configuration?: Configuration, basePath
 };
 
 /**
- * ListsApi - interface
- * @export
- * @interface ListsApi
- */
-export interface ListsApiInterface {
-    /**
-     * Delete List (User/Admin Only)
-     * @summary Delete List (User/Admin Only)
-     * @param {string} authorization 
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ListsApiInterface
-     */
-    async deleteList(authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
-
-    /**
-     * Get List
-     * @summary Get List
-     * @param {string} authorization 
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ListsApiInterface
-     */
-    async getList(authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
-
-    /**
-     * Get List Contents
-     * @summary Get List Contents
-     * @param {string} authorization 
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ListsApiInterface
-     */
-    async getListGames(authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
-
-    /**
-     * Update List (User/Admin Only)
-     * @summary Update List (User/Admin Only)
-     * @param {string} authorization 
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ListsApiInterface
-     */
-    async patchList(authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
-
-    /**
-     * 
-     * @param {List} body 
-     * @param {string} authorization 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ListsApiInterface
-     */
-    async postList(body: List, authorization: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Array>>;
-
-    /**
-     * Replace Games in List (User/Admin Only)
-     * @summary Replace Games in List (User/Admin Only)
-     * @param {any} body 
-     * @param {string} authorization 
-     * @param {number} id 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof ListsApiInterface
-     */
-    async putList(body: any, authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<void>>;
-
-}
-
-/**
  * ListsApi - object-oriented interface
  * @export
  * @class ListsApi
  * @extends {BaseAPI}
  */
-export class ListsApi extends BaseAPI implements ListsApiInterface {
+export class ListsApi extends BaseAPI {
     /**
      * Delete List (User/Admin Only)
      * @summary Delete List (User/Admin Only)
