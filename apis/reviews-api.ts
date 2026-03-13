@@ -448,15 +448,20 @@ export const ReviewsApiAxiosParamCreator = function (configuration?: Configurati
          * Add Review for Game (User/Admin Only)
          * @summary Add Review for Game (User/Admin Only)
          * @param {Review} body 
+         * @param {string} cFTurnstileProof 
          * @param {string} authorization 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        putGameReview: async (body: Review, authorization: string, id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        putGameReview: async (body: Review, cFTurnstileProof: string, authorization: string, id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling putGameReview.');
+            }
+            // verify required parameter 'cFTurnstileProof' is not null or undefined
+            if (cFTurnstileProof === null || cFTurnstileProof === undefined) {
+                throw new RequiredError('cFTurnstileProof','Required parameter cFTurnstileProof was null or undefined when calling putGameReview.');
             }
             // verify required parameter 'authorization' is not null or undefined
             if (authorization === null || authorization === undefined) {
@@ -485,6 +490,10 @@ export const ReviewsApiAxiosParamCreator = function (configuration?: Configurati
                     ? await configuration.accessToken()
                     : await configuration.accessToken;
                 localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            if (cFTurnstileProof !== undefined && cFTurnstileProof !== null) {
+                localVarHeaderParameter['CF-Turnstile-Proof'] = String(cFTurnstileProof);
             }
 
             if (authorization !== undefined && authorization !== null) {
@@ -705,13 +714,14 @@ export const ReviewsApiFp = function(configuration?: Configuration) {
          * Add Review for Game (User/Admin Only)
          * @summary Add Review for Game (User/Admin Only)
          * @param {Review} body 
+         * @param {string} cFTurnstileProof 
          * @param {string} authorization 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async putGameReview(body: Review, authorization: string, id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Review>>> {
-            const localVarAxiosArgs = await ReviewsApiAxiosParamCreator(configuration).putGameReview(body, authorization, id, options);
+        async putGameReview(body: Review, cFTurnstileProof: string, authorization: string, id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Review>>> {
+            const localVarAxiosArgs = await ReviewsApiAxiosParamCreator(configuration).putGameReview(body, cFTurnstileProof, authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -835,13 +845,14 @@ export const ReviewsApiFactory = function (configuration?: Configuration, basePa
          * Add Review for Game (User/Admin Only)
          * @summary Add Review for Game (User/Admin Only)
          * @param {Review} body 
+         * @param {string} cFTurnstileProof 
          * @param {string} authorization 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async putGameReview(body: Review, authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Review>> {
-            return ReviewsApiFp(configuration).putGameReview(body, authorization, id, options).then((request) => request(axios, basePath));
+        async putGameReview(body: Review, cFTurnstileProof: string, authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Review>> {
+            return ReviewsApiFp(configuration).putGameReview(body, cFTurnstileProof, authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
          * Like Review (User/Admin Only)
@@ -965,14 +976,15 @@ export class ReviewsApi extends BaseAPI {
      * Add Review for Game (User/Admin Only)
      * @summary Add Review for Game (User/Admin Only)
      * @param {Review} body 
+     * @param {string} cFTurnstileProof 
      * @param {string} authorization 
      * @param {number} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReviewsApi
      */
-    public async putGameReview(body: Review, authorization: string, id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Review>> {
-        return ReviewsApiFp(this.configuration).putGameReview(body, authorization, id, options).then((request) => request(this.axios, this.basePath));
+    public async putGameReview(body: Review, cFTurnstileProof: string, authorization: string, id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Review>> {
+        return ReviewsApiFp(this.configuration).putGameReview(body, cFTurnstileProof, authorization, id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Like Review (User/Admin Only)

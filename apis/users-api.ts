@@ -33,7 +33,6 @@ import { User } from '../models';
 import { UserCan } from '../models';
 import { UserExt } from '../models';
 import { UserRegistration } from '../models';
-import { UserRegistrationResponse } from '../models';
 /**
  * UsersApi - axios parameter creator
  * @export
@@ -829,13 +828,18 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
          * Register New User
          * @summary Register New User
          * @param {UserRegistration} body 
+         * @param {string} cFTurnstileProof 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postUser: async (body: UserRegistration, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        postUser: async (body: UserRegistration, cFTurnstileProof: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling postUser.');
+            }
+            // verify required parameter 'cFTurnstileProof' is not null or undefined
+            if (cFTurnstileProof === null || cFTurnstileProof === undefined) {
+                throw new RequiredError('cFTurnstileProof','Required parameter cFTurnstileProof was null or undefined when calling postUser.');
             }
             const localVarPath = `/users`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -847,6 +851,10 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (cFTurnstileProof !== undefined && cFTurnstileProof !== null) {
+                localVarHeaderParameter['CF-Turnstile-Proof'] = String(cFTurnstileProof);
+            }
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -1163,11 +1171,12 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * Register New User
          * @summary Register New User
          * @param {UserRegistration} body 
+         * @param {string} cFTurnstileProof 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postUser(body: UserRegistration, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<UserRegistrationResponse>>> {
-            const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).postUser(body, options);
+        async postUser(body: UserRegistration, cFTurnstileProof: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<any>>> {
+            const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).postUser(body, cFTurnstileProof, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1364,11 +1373,12 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * Register New User
          * @summary Register New User
          * @param {UserRegistration} body 
+         * @param {string} cFTurnstileProof 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postUser(body: UserRegistration, options?: AxiosRequestConfig): Promise<AxiosResponse<UserRegistrationResponse>> {
-            return UsersApiFp(configuration).postUser(body, options).then((request) => request(axios, basePath));
+        async postUser(body: UserRegistration, cFTurnstileProof: string, options?: AxiosRequestConfig): Promise<AxiosResponse<any>> {
+            return UsersApiFp(configuration).postUser(body, cFTurnstileProof, options).then((request) => request(axios, basePath));
         },
         /**
          * Adds a user to your following list. Idempotent.
@@ -1572,12 +1582,13 @@ export class UsersApi extends BaseAPI {
      * Register New User
      * @summary Register New User
      * @param {UserRegistration} body 
+     * @param {string} cFTurnstileProof 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    public async postUser(body: UserRegistration, options?: AxiosRequestConfig) : Promise<AxiosResponse<UserRegistrationResponse>> {
-        return UsersApiFp(this.configuration).postUser(body, options).then((request) => request(this.axios, this.basePath));
+    public async postUser(body: UserRegistration, cFTurnstileProof: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<any>> {
+        return UsersApiFp(this.configuration).postUser(body, cFTurnstileProof, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Adds a user to your following list. Idempotent.

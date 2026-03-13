@@ -20,14 +20,68 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 import { APIError } from '../models';
 import { AuthResponse } from '../models';
 import { FinalizePassResetParams } from '../models';
+import { Problem } from '../models';
 import { ResetRequestParams } from '../models';
+import { ResultAuthResponseProblem_ } from '../models';
 import { UserCredentials } from '../models';
+import { UserRegistrationResponse } from '../models';
 /**
  * AuthenticationApi - axios parameter creator
  * @export
  */
 export const AuthenticationApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * 
+         * @param {string} key 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getUserVerify: async (key: string, id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'key' is not null or undefined
+            if (key === null || key === undefined) {
+                throw new RequiredError('key','Required parameter key was null or undefined when calling getUserVerify.');
+            }
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling getUserVerify.');
+            }
+            const localVarPath = `/auth/user-verify`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (key !== undefined) {
+                localVarQueryParameter['key'] = key;
+            }
+
+            if (id !== undefined) {
+                localVarQueryParameter['id'] = id;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * Should be called with the token the user received in their reset email. Generates a token after successful completion.
          * @summary Finalize Password Reset
@@ -71,13 +125,18 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
          * Login
          * @summary Login
          * @param {UserCredentials} body 
+         * @param {string} cFTurnstileProof 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postLogin: async (body: UserCredentials, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        postLogin: async (body: UserCredentials, cFTurnstileProof: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling postLogin.');
+            }
+            // verify required parameter 'cFTurnstileProof' is not null or undefined
+            if (cFTurnstileProof === null || cFTurnstileProof === undefined) {
+                throw new RequiredError('cFTurnstileProof','Required parameter cFTurnstileProof was null or undefined when calling postLogin.');
             }
             const localVarPath = `/auth/login`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -89,6 +148,10 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (cFTurnstileProof !== undefined && cFTurnstileProof !== null) {
+                localVarHeaderParameter['CF-Turnstile-Proof'] = String(cFTurnstileProof);
+            }
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -157,13 +220,18 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
          * Request Password Reset
          * @summary Request Password Reset
          * @param {ResetRequestParams} body 
+         * @param {string} cFTurnstileProof 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postResetRequest: async (body: ResetRequestParams, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        postResetRequest: async (body: ResetRequestParams, cFTurnstileProof: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling postResetRequest.');
+            }
+            // verify required parameter 'cFTurnstileProof' is not null or undefined
+            if (cFTurnstileProof === null || cFTurnstileProof === undefined) {
+                throw new RequiredError('cFTurnstileProof','Required parameter cFTurnstileProof was null or undefined when calling postResetRequest.');
             }
             const localVarPath = `/auth/reset-request`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -175,6 +243,10 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
             const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (cFTurnstileProof !== undefined && cFTurnstileProof !== null) {
+                localVarHeaderParameter['CF-Turnstile-Proof'] = String(cFTurnstileProof);
+            }
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
 
@@ -206,6 +278,20 @@ export const AuthenticationApiAxiosParamCreator = function (configuration?: Conf
 export const AuthenticationApiFp = function(configuration?: Configuration) {
     return {
         /**
+         * 
+         * @param {string} key 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUserVerify(key: string, id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<UserRegistrationResponse>>> {
+            const localVarAxiosArgs = await AuthenticationApiAxiosParamCreator(configuration).getUserVerify(key, id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * Should be called with the token the user received in their reset email. Generates a token after successful completion.
          * @summary Finalize Password Reset
          * @param {FinalizePassResetParams} [body] 
@@ -223,11 +309,12 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
          * Login
          * @summary Login
          * @param {UserCredentials} body 
+         * @param {string} cFTurnstileProof 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postLogin(body: UserCredentials, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<AuthResponse>>> {
-            const localVarAxiosArgs = await AuthenticationApiAxiosParamCreator(configuration).postLogin(body, options);
+        async postLogin(body: UserCredentials, cFTurnstileProof: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<ResultAuthResponseProblem_>>> {
+            const localVarAxiosArgs = await AuthenticationApiAxiosParamCreator(configuration).postLogin(body, cFTurnstileProof, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -251,11 +338,12 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
          * Request Password Reset
          * @summary Request Password Reset
          * @param {ResetRequestParams} body 
+         * @param {string} cFTurnstileProof 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postResetRequest(body: ResetRequestParams, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
-            const localVarAxiosArgs = await AuthenticationApiAxiosParamCreator(configuration).postResetRequest(body, options);
+        async postResetRequest(body: ResetRequestParams, cFTurnstileProof: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+            const localVarAxiosArgs = await AuthenticationApiAxiosParamCreator(configuration).postResetRequest(body, cFTurnstileProof, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -271,6 +359,16 @@ export const AuthenticationApiFp = function(configuration?: Configuration) {
 export const AuthenticationApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     return {
         /**
+         * 
+         * @param {string} key 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getUserVerify(key: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<UserRegistrationResponse>> {
+            return AuthenticationApiFp(configuration).getUserVerify(key, id, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Should be called with the token the user received in their reset email. Generates a token after successful completion.
          * @summary Finalize Password Reset
          * @param {FinalizePassResetParams} [body] 
@@ -284,11 +382,12 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
          * Login
          * @summary Login
          * @param {UserCredentials} body 
+         * @param {string} cFTurnstileProof 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postLogin(body: UserCredentials, options?: AxiosRequestConfig): Promise<AxiosResponse<AuthResponse>> {
-            return AuthenticationApiFp(configuration).postLogin(body, options).then((request) => request(axios, basePath));
+        async postLogin(body: UserCredentials, cFTurnstileProof: string, options?: AxiosRequestConfig): Promise<AxiosResponse<ResultAuthResponseProblem_>> {
+            return AuthenticationApiFp(configuration).postLogin(body, cFTurnstileProof, options).then((request) => request(axios, basePath));
         },
         /**
          * Allows a user with a valid token to request a fresh token with a new expiration date. This should be invoked whenever the 'useExp' timestamp in the token payload has been exceeded.
@@ -304,11 +403,12 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
          * Request Password Reset
          * @summary Request Password Reset
          * @param {ResetRequestParams} body 
+         * @param {string} cFTurnstileProof 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postResetRequest(body: ResetRequestParams, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
-            return AuthenticationApiFp(configuration).postResetRequest(body, options).then((request) => request(axios, basePath));
+        async postResetRequest(body: ResetRequestParams, cFTurnstileProof: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+            return AuthenticationApiFp(configuration).postResetRequest(body, cFTurnstileProof, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -320,6 +420,17 @@ export const AuthenticationApiFactory = function (configuration?: Configuration,
  * @extends {BaseAPI}
  */
 export class AuthenticationApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} key 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof AuthenticationApi
+     */
+    public async getUserVerify(key: string, id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<UserRegistrationResponse>> {
+        return AuthenticationApiFp(this.configuration).getUserVerify(key, id, options).then((request) => request(this.axios, this.basePath));
+    }
     /**
      * Should be called with the token the user received in their reset email. Generates a token after successful completion.
      * @summary Finalize Password Reset
@@ -335,12 +446,13 @@ export class AuthenticationApi extends BaseAPI {
      * Login
      * @summary Login
      * @param {UserCredentials} body 
+     * @param {string} cFTurnstileProof 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthenticationApi
      */
-    public async postLogin(body: UserCredentials, options?: AxiosRequestConfig) : Promise<AxiosResponse<AuthResponse>> {
-        return AuthenticationApiFp(this.configuration).postLogin(body, options).then((request) => request(this.axios, this.basePath));
+    public async postLogin(body: UserCredentials, cFTurnstileProof: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<ResultAuthResponseProblem_>> {
+        return AuthenticationApiFp(this.configuration).postLogin(body, cFTurnstileProof, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Allows a user with a valid token to request a fresh token with a new expiration date. This should be invoked whenever the 'useExp' timestamp in the token payload has been exceeded.
@@ -357,11 +469,12 @@ export class AuthenticationApi extends BaseAPI {
      * Request Password Reset
      * @summary Request Password Reset
      * @param {ResetRequestParams} body 
+     * @param {string} cFTurnstileProof 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthenticationApi
      */
-    public async postResetRequest(body: ResetRequestParams, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
-        return AuthenticationApiFp(this.configuration).postResetRequest(body, options).then((request) => request(this.axios, this.basePath));
+    public async postResetRequest(body: ResetRequestParams, cFTurnstileProof: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+        return AuthenticationApiFp(this.configuration).postResetRequest(body, cFTurnstileProof, options).then((request) => request(this.axios, this.basePath));
     }
 }

@@ -16,7 +16,7 @@
  * 
  *
  * @export
- * @interface Problem
+ * @interface ResultAuthResponseProblem_
  */
-export interface Problem {
+export interface ResultAuthResponseProblem_ {
 }

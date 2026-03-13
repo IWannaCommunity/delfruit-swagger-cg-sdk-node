@@ -782,14 +782,19 @@ export const GamesApiAxiosParamCreator = function (configuration?: Configuration
          * Add Game (Admin Only)
          * @summary Add Game (Admin Only)
          * @param {PostGameParams} body 
+         * @param {string} cFTurnstileProof 
          * @param {string} authorization 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postGame: async (body: PostGameParams, authorization: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        postGame: async (body: PostGameParams, cFTurnstileProof: string, authorization: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling postGame.');
+            }
+            // verify required parameter 'cFTurnstileProof' is not null or undefined
+            if (cFTurnstileProof === null || cFTurnstileProof === undefined) {
+                throw new RequiredError('cFTurnstileProof','Required parameter cFTurnstileProof was null or undefined when calling postGame.');
             }
             // verify required parameter 'authorization' is not null or undefined
             if (authorization === null || authorization === undefined) {
@@ -813,6 +818,10 @@ export const GamesApiAxiosParamCreator = function (configuration?: Configuration
                     ? await configuration.accessToken()
                     : await configuration.accessToken;
                 localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            if (cFTurnstileProof !== undefined && cFTurnstileProof !== null) {
+                localVarHeaderParameter['CF-Turnstile-Proof'] = String(cFTurnstileProof);
             }
 
             if (authorization !== undefined && authorization !== null) {
@@ -844,12 +853,13 @@ export const GamesApiAxiosParamCreator = function (configuration?: Configuration
          * @summary Add Screenshot for Game (User/Admin Only)
          * @param {string} description 
          * @param {Blob} screenshot 
+         * @param {string} cFTurnstileProof 
          * @param {string} authorization 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postGameScreenshotForm: async (description: string, screenshot: Blob, authorization: string, id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        postGameScreenshotForm: async (description: string, screenshot: Blob, cFTurnstileProof: string, authorization: string, id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'description' is not null or undefined
             if (description === null || description === undefined) {
                 throw new RequiredError('description','Required parameter description was null or undefined when calling postGameScreenshotForm.');
@@ -857,6 +867,10 @@ export const GamesApiAxiosParamCreator = function (configuration?: Configuration
             // verify required parameter 'screenshot' is not null or undefined
             if (screenshot === null || screenshot === undefined) {
                 throw new RequiredError('screenshot','Required parameter screenshot was null or undefined when calling postGameScreenshotForm.');
+            }
+            // verify required parameter 'cFTurnstileProof' is not null or undefined
+            if (cFTurnstileProof === null || cFTurnstileProof === undefined) {
+                throw new RequiredError('cFTurnstileProof','Required parameter cFTurnstileProof was null or undefined when calling postGameScreenshotForm.');
             }
             // verify required parameter 'authorization' is not null or undefined
             if (authorization === null || authorization === undefined) {
@@ -886,6 +900,10 @@ export const GamesApiAxiosParamCreator = function (configuration?: Configuration
                     ? await configuration.accessToken()
                     : await configuration.accessToken;
                 localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            if (cFTurnstileProof !== undefined && cFTurnstileProof !== null) {
+                localVarHeaderParameter['CF-Turnstile-Proof'] = String(cFTurnstileProof);
             }
 
             if (authorization !== undefined && authorization !== null) {
@@ -990,15 +1008,20 @@ export const GamesApiAxiosParamCreator = function (configuration?: Configuration
          * Add Review for Game (User/Admin Only)
          * @summary Add Review for Game (User/Admin Only)
          * @param {Review} body 
+         * @param {string} cFTurnstileProof 
          * @param {string} authorization 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        putGameReview: async (body: Review, authorization: string, id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        putGameReview: async (body: Review, cFTurnstileProof: string, authorization: string, id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling putGameReview.');
+            }
+            // verify required parameter 'cFTurnstileProof' is not null or undefined
+            if (cFTurnstileProof === null || cFTurnstileProof === undefined) {
+                throw new RequiredError('cFTurnstileProof','Required parameter cFTurnstileProof was null or undefined when calling putGameReview.');
             }
             // verify required parameter 'authorization' is not null or undefined
             if (authorization === null || authorization === undefined) {
@@ -1027,6 +1050,10 @@ export const GamesApiAxiosParamCreator = function (configuration?: Configuration
                     ? await configuration.accessToken()
                     : await configuration.accessToken;
                 localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            if (cFTurnstileProof !== undefined && cFTurnstileProof !== null) {
+                localVarHeaderParameter['CF-Turnstile-Proof'] = String(cFTurnstileProof);
             }
 
             if (authorization !== undefined && authorization !== null) {
@@ -1274,12 +1301,13 @@ export const GamesApiFp = function(configuration?: Configuration) {
          * Add Game (Admin Only)
          * @summary Add Game (Admin Only)
          * @param {PostGameParams} body 
+         * @param {string} cFTurnstileProof 
          * @param {string} authorization 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postGame(body: PostGameParams, authorization: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Game>>> {
-            const localVarAxiosArgs = await GamesApiAxiosParamCreator(configuration).postGame(body, authorization, options);
+        async postGame(body: PostGameParams, cFTurnstileProof: string, authorization: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Game>>> {
+            const localVarAxiosArgs = await GamesApiAxiosParamCreator(configuration).postGame(body, cFTurnstileProof, authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1290,13 +1318,14 @@ export const GamesApiFp = function(configuration?: Configuration) {
          * @summary Add Screenshot for Game (User/Admin Only)
          * @param {string} description 
          * @param {Blob} screenshot 
+         * @param {string} cFTurnstileProof 
          * @param {string} authorization 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postGameScreenshotForm(description: string, screenshot: Blob, authorization: string, id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Screenshot>>> {
-            const localVarAxiosArgs = await GamesApiAxiosParamCreator(configuration).postGameScreenshotForm(description, screenshot, authorization, id, options);
+        async postGameScreenshotForm(description: string, screenshot: Blob, cFTurnstileProof: string, authorization: string, id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Screenshot>>> {
+            const localVarAxiosArgs = await GamesApiAxiosParamCreator(configuration).postGameScreenshotForm(description, screenshot, cFTurnstileProof, authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1322,13 +1351,14 @@ export const GamesApiFp = function(configuration?: Configuration) {
          * Add Review for Game (User/Admin Only)
          * @summary Add Review for Game (User/Admin Only)
          * @param {Review} body 
+         * @param {string} cFTurnstileProof 
          * @param {string} authorization 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async putGameReview(body: Review, authorization: string, id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Review>>> {
-            const localVarAxiosArgs = await GamesApiAxiosParamCreator(configuration).putGameReview(body, authorization, id, options);
+        async putGameReview(body: Review, cFTurnstileProof: string, authorization: string, id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Review>>> {
+            const localVarAxiosArgs = await GamesApiAxiosParamCreator(configuration).putGameReview(body, cFTurnstileProof, authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1511,25 +1541,27 @@ export const GamesApiFactory = function (configuration?: Configuration, basePath
          * Add Game (Admin Only)
          * @summary Add Game (Admin Only)
          * @param {PostGameParams} body 
+         * @param {string} cFTurnstileProof 
          * @param {string} authorization 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postGame(body: PostGameParams, authorization: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Game>> {
-            return GamesApiFp(configuration).postGame(body, authorization, options).then((request) => request(axios, basePath));
+        async postGame(body: PostGameParams, cFTurnstileProof: string, authorization: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Game>> {
+            return GamesApiFp(configuration).postGame(body, cFTurnstileProof, authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * Add Screenshot for Game (User/Admin Only)
          * @summary Add Screenshot for Game (User/Admin Only)
          * @param {string} description 
          * @param {Blob} screenshot 
+         * @param {string} cFTurnstileProof 
          * @param {string} authorization 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postGameScreenshotForm(description: string, screenshot: Blob, authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Screenshot>> {
-            return GamesApiFp(configuration).postGameScreenshotForm(description, screenshot, authorization, id, options).then((request) => request(axios, basePath));
+        async postGameScreenshotForm(description: string, screenshot: Blob, cFTurnstileProof: string, authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Screenshot>> {
+            return GamesApiFp(configuration).postGameScreenshotForm(description, screenshot, cFTurnstileProof, authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
          * Clears and sets an array of tag IDs for a game on a user-by-user basis.
@@ -1547,13 +1579,14 @@ export const GamesApiFactory = function (configuration?: Configuration, basePath
          * Add Review for Game (User/Admin Only)
          * @summary Add Review for Game (User/Admin Only)
          * @param {Review} body 
+         * @param {string} cFTurnstileProof 
          * @param {string} authorization 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async putGameReview(body: Review, authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Review>> {
-            return GamesApiFp(configuration).putGameReview(body, authorization, id, options).then((request) => request(axios, basePath));
+        async putGameReview(body: Review, cFTurnstileProof: string, authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Review>> {
+            return GamesApiFp(configuration).putGameReview(body, cFTurnstileProof, authorization, id, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -1744,27 +1777,29 @@ export class GamesApi extends BaseAPI {
      * Add Game (Admin Only)
      * @summary Add Game (Admin Only)
      * @param {PostGameParams} body 
+     * @param {string} cFTurnstileProof 
      * @param {string} authorization 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GamesApi
      */
-    public async postGame(body: PostGameParams, authorization: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<Game>> {
-        return GamesApiFp(this.configuration).postGame(body, authorization, options).then((request) => request(this.axios, this.basePath));
+    public async postGame(body: PostGameParams, cFTurnstileProof: string, authorization: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<Game>> {
+        return GamesApiFp(this.configuration).postGame(body, cFTurnstileProof, authorization, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Add Screenshot for Game (User/Admin Only)
      * @summary Add Screenshot for Game (User/Admin Only)
      * @param {string} description 
      * @param {Blob} screenshot 
+     * @param {string} cFTurnstileProof 
      * @param {string} authorization 
      * @param {number} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GamesApi
      */
-    public async postGameScreenshotForm(description: string, screenshot: Blob, authorization: string, id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Screenshot>> {
-        return GamesApiFp(this.configuration).postGameScreenshotForm(description, screenshot, authorization, id, options).then((request) => request(this.axios, this.basePath));
+    public async postGameScreenshotForm(description: string, screenshot: Blob, cFTurnstileProof: string, authorization: string, id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Screenshot>> {
+        return GamesApiFp(this.configuration).postGameScreenshotForm(description, screenshot, cFTurnstileProof, authorization, id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Clears and sets an array of tag IDs for a game on a user-by-user basis.
@@ -1783,13 +1818,14 @@ export class GamesApi extends BaseAPI {
      * Add Review for Game (User/Admin Only)
      * @summary Add Review for Game (User/Admin Only)
      * @param {Review} body 
+     * @param {string} cFTurnstileProof 
      * @param {string} authorization 
      * @param {number} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof GamesApi
      */
-    public async putGameReview(body: Review, authorization: string, id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Review>> {
-        return GamesApiFp(this.configuration).putGameReview(body, authorization, id, options).then((request) => request(this.axios, this.basePath));
+    public async putGameReview(body: Review, cFTurnstileProof: string, authorization: string, id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Review>> {
+        return GamesApiFp(this.configuration).putGameReview(body, cFTurnstileProof, authorization, id, options).then((request) => request(this.axios, this.basePath));
     }
 }

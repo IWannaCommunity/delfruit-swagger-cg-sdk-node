@@ -332,12 +332,13 @@ export const ScreenshotsApiAxiosParamCreator = function (configuration?: Configu
          * @summary Add Screenshot for Game (User/Admin Only)
          * @param {string} description 
          * @param {Blob} screenshot 
+         * @param {string} cFTurnstileProof 
          * @param {string} authorization 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postGameScreenshotForm: async (description: string, screenshot: Blob, authorization: string, id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        postGameScreenshotForm: async (description: string, screenshot: Blob, cFTurnstileProof: string, authorization: string, id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'description' is not null or undefined
             if (description === null || description === undefined) {
                 throw new RequiredError('description','Required parameter description was null or undefined when calling postGameScreenshotForm.');
@@ -345,6 +346,10 @@ export const ScreenshotsApiAxiosParamCreator = function (configuration?: Configu
             // verify required parameter 'screenshot' is not null or undefined
             if (screenshot === null || screenshot === undefined) {
                 throw new RequiredError('screenshot','Required parameter screenshot was null or undefined when calling postGameScreenshotForm.');
+            }
+            // verify required parameter 'cFTurnstileProof' is not null or undefined
+            if (cFTurnstileProof === null || cFTurnstileProof === undefined) {
+                throw new RequiredError('cFTurnstileProof','Required parameter cFTurnstileProof was null or undefined when calling postGameScreenshotForm.');
             }
             // verify required parameter 'authorization' is not null or undefined
             if (authorization === null || authorization === undefined) {
@@ -374,6 +379,10 @@ export const ScreenshotsApiAxiosParamCreator = function (configuration?: Configu
                     ? await configuration.accessToken()
                     : await configuration.accessToken;
                 localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            if (cFTurnstileProof !== undefined && cFTurnstileProof !== null) {
+                localVarHeaderParameter['CF-Turnstile-Proof'] = String(cFTurnstileProof);
             }
 
             if (authorization !== undefined && authorization !== null) {
@@ -504,13 +513,14 @@ export const ScreenshotsApiFp = function(configuration?: Configuration) {
          * @summary Add Screenshot for Game (User/Admin Only)
          * @param {string} description 
          * @param {Blob} screenshot 
+         * @param {string} cFTurnstileProof 
          * @param {string} authorization 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postGameScreenshotForm(description: string, screenshot: Blob, authorization: string, id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Screenshot>>> {
-            const localVarAxiosArgs = await ScreenshotsApiAxiosParamCreator(configuration).postGameScreenshotForm(description, screenshot, authorization, id, options);
+        async postGameScreenshotForm(description: string, screenshot: Blob, cFTurnstileProof: string, authorization: string, id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Screenshot>>> {
+            const localVarAxiosArgs = await ScreenshotsApiAxiosParamCreator(configuration).postGameScreenshotForm(description, screenshot, cFTurnstileProof, authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -593,13 +603,14 @@ export const ScreenshotsApiFactory = function (configuration?: Configuration, ba
          * @summary Add Screenshot for Game (User/Admin Only)
          * @param {string} description 
          * @param {Blob} screenshot 
+         * @param {string} cFTurnstileProof 
          * @param {string} authorization 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postGameScreenshotForm(description: string, screenshot: Blob, authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Screenshot>> {
-            return ScreenshotsApiFp(configuration).postGameScreenshotForm(description, screenshot, authorization, id, options).then((request) => request(axios, basePath));
+        async postGameScreenshotForm(description: string, screenshot: Blob, cFTurnstileProof: string, authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Screenshot>> {
+            return ScreenshotsApiFp(configuration).postGameScreenshotForm(description, screenshot, cFTurnstileProof, authorization, id, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -684,13 +695,14 @@ export class ScreenshotsApi extends BaseAPI {
      * @summary Add Screenshot for Game (User/Admin Only)
      * @param {string} description 
      * @param {Blob} screenshot 
+     * @param {string} cFTurnstileProof 
      * @param {string} authorization 
      * @param {number} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ScreenshotsApi
      */
-    public async postGameScreenshotForm(description: string, screenshot: Blob, authorization: string, id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Screenshot>> {
-        return ScreenshotsApiFp(this.configuration).postGameScreenshotForm(description, screenshot, authorization, id, options).then((request) => request(this.axios, this.basePath));
+    public async postGameScreenshotForm(description: string, screenshot: Blob, cFTurnstileProof: string, authorization: string, id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Screenshot>> {
+        return ScreenshotsApiFp(this.configuration).postGameScreenshotForm(description, screenshot, cFTurnstileProof, authorization, id, options).then((request) => request(this.axios, this.basePath));
     }
 }
