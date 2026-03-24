@@ -31,6 +31,8 @@ export * from './pick-auth-response-exclude-keyof-auth-response-email-or-banned-
 export * from './pick-user-exclude-keyof-user-email-or-is-admin-or-can-report-or-can-submit-or-can-review-or-can-screenshot-or-banned_';
 export * from './pick-user-ext-exclude-keyof-user-ext-ratings-count-or-screenshot-count_';
 export * from './post-game-params';
+export * from './post-message-params';
+export * from './post-report-params';
 export * from './problem';
 export * from './rating';
 export * from './report';

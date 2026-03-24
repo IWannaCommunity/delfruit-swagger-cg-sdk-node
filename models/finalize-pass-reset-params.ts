@@ -24,7 +24,7 @@ export interface FinalizePassResetParams {
      * @type {string}
      * @memberof FinalizePassResetParams
      */
-    username: string;
+    email: string;
 
     /**
      * @type {string}
