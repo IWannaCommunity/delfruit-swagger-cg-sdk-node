@@ -18,7 +18,6 @@ import { Configuration } from '../configuration';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { Message } from '../models';
-import { PostMessageParams } from '../models';
 /**
  * MessagesApi - axios parameter creator
  * @export
@@ -186,12 +185,13 @@ export const MessagesApiAxiosParamCreator = function (configuration?: Configurat
         },
         /**
          * 
-         * @param {PostMessageParams} body 
+         * @param {Message} body 
          * @param {string} authorization 
+         * @param {string} cFTurnstileProof 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        postMessage: async (body: PostMessageParams, authorization: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        postMessage: async (body: Message, authorization: string, cFTurnstileProof: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling postMessage.');
@@ -199,6 +199,10 @@ export const MessagesApiAxiosParamCreator = function (configuration?: Configurat
             // verify required parameter 'authorization' is not null or undefined
             if (authorization === null || authorization === undefined) {
                 throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling postMessage.');
+            }
+            // verify required parameter 'cFTurnstileProof' is not null or undefined
+            if (cFTurnstileProof === null || cFTurnstileProof === undefined) {
+                throw new RequiredError('cFTurnstileProof','Required parameter cFTurnstileProof was null or undefined when calling postMessage.');
             }
             const localVarPath = `/message`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -222,6 +226,10 @@ export const MessagesApiAxiosParamCreator = function (configuration?: Configurat
 
             if (authorization !== undefined && authorization !== null) {
                 localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+            if (cFTurnstileProof !== undefined && cFTurnstileProof !== null) {
+                localVarHeaderParameter['CF-Turnstile-Proof'] = String(cFTurnstileProof);
             }
 
             localVarHeaderParameter['Content-Type'] = 'application/json';
@@ -295,13 +303,14 @@ export const MessagesApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {PostMessageParams} body 
+         * @param {Message} body 
          * @param {string} authorization 
+         * @param {string} cFTurnstileProof 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postMessage(body: PostMessageParams, authorization: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
-            const localVarAxiosArgs = await MessagesApiAxiosParamCreator(configuration).postMessage(body, authorization, options);
+        async postMessage(body: Message, authorization: string, cFTurnstileProof: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+            const localVarAxiosArgs = await MessagesApiAxiosParamCreator(configuration).postMessage(body, authorization, cFTurnstileProof, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -346,13 +355,14 @@ export const MessagesApiFactory = function (configuration?: Configuration, baseP
         },
         /**
          * 
-         * @param {PostMessageParams} body 
+         * @param {Message} body 
          * @param {string} authorization 
+         * @param {string} cFTurnstileProof 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postMessage(body: PostMessageParams, authorization: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
-            return MessagesApiFp(configuration).postMessage(body, authorization, options).then((request) => request(axios, basePath));
+        async postMessage(body: Message, authorization: string, cFTurnstileProof: string, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+            return MessagesApiFp(configuration).postMessage(body, authorization, cFTurnstileProof, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -397,13 +407,14 @@ export class MessagesApi extends BaseAPI {
     }
     /**
      * 
-     * @param {PostMessageParams} body 
+     * @param {Message} body 
      * @param {string} authorization 
+     * @param {string} cFTurnstileProof 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof MessagesApi
      */
-    public async postMessage(body: PostMessageParams, authorization: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
-        return MessagesApiFp(this.configuration).postMessage(body, authorization, options).then((request) => request(this.axios, this.basePath));
+    public async postMessage(body: Message, authorization: string, cFTurnstileProof: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+        return MessagesApiFp(this.configuration).postMessage(body, authorization, cFTurnstileProof, options).then((request) => request(this.axios, this.basePath));
     }
 }

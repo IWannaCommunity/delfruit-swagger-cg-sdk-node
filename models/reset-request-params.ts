@@ -31,10 +31,4 @@ export interface ResetRequestParams {
      * @memberof ResetRequestParams
      */
     email: string;
-
-    /**
-     * @type {string}
-     * @memberof ResetRequestParams
-     */
-    cfTurnstileResponse: string;
 }
