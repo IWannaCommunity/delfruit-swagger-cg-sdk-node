@@ -17,6 +17,7 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { InlineResponse2002 } from '../models';
 import { List } from '../models';
 /**
  * ListsApi - axios parameter creator
@@ -65,6 +66,86 @@ export const ListsApiAxiosParamCreator = function (configuration?: Configuration
             if (authorization !== undefined && authorization !== null) {
                 localVarHeaderParameter['Authorization'] = String(authorization);
             }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get Clear List Contents
+         * @summary Get Clear List Contents
+         * @param {number} uid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getClearListGames: async (uid: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'uid' is not null or undefined
+            if (uid === null || uid === undefined) {
+                throw new RequiredError('uid','Required parameter uid was null or undefined when calling getClearListGames.');
+            }
+            const localVarPath = `/lists/clears/{uid}`
+                .replace(`{${"uid"}}`, encodeURIComponent(String(uid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get Favorites List Contents
+         * @summary Get Favorites List Contents
+         * @param {number} uid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getFavoritesListGames: async (uid: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'uid' is not null or undefined
+            if (uid === null || uid === undefined) {
+                throw new RequiredError('uid','Required parameter uid was null or undefined when calling getFavoritesListGames.');
+            }
+            const localVarPath = `/lists/favorites/{uid}`
+                .replace(`{${"uid"}}`, encodeURIComponent(String(uid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -390,6 +471,34 @@ export const ListsApiFp = function(configuration?: Configuration) {
             };
         },
         /**
+         * Get Clear List Contents
+         * @summary Get Clear List Contents
+         * @param {number} uid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getClearListGames(uid: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<InlineResponse2002>>>> {
+            const localVarAxiosArgs = await ListsApiAxiosParamCreator(configuration).getClearListGames(uid, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Get Favorites List Contents
+         * @summary Get Favorites List Contents
+         * @param {number} uid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getFavoritesListGames(uid: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<InlineResponse2002>>>> {
+            const localVarAxiosArgs = await ListsApiAxiosParamCreator(configuration).getFavoritesListGames(uid, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * Get List
          * @summary Get List
          * @param {string} authorization 
@@ -485,6 +594,26 @@ export const ListsApiFactory = function (configuration?: Configuration, basePath
             return ListsApiFp(configuration).deleteList(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
+         * Get Clear List Contents
+         * @summary Get Clear List Contents
+         * @param {number} uid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getClearListGames(uid: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<InlineResponse2002>>> {
+            return ListsApiFp(configuration).getClearListGames(uid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get Favorites List Contents
+         * @summary Get Favorites List Contents
+         * @param {number} uid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getFavoritesListGames(uid: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<InlineResponse2002>>> {
+            return ListsApiFp(configuration).getFavoritesListGames(uid, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Get List
          * @summary Get List
          * @param {string} authorization 
@@ -560,6 +689,28 @@ export class ListsApi extends BaseAPI {
      */
     public async deleteList(authorization: string, id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
         return ListsApiFp(this.configuration).deleteList(authorization, id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Get Clear List Contents
+     * @summary Get Clear List Contents
+     * @param {number} uid 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ListsApi
+     */
+    public async getClearListGames(uid: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<InlineResponse2002>>> {
+        return ListsApiFp(this.configuration).getClearListGames(uid, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Get Favorites List Contents
+     * @summary Get Favorites List Contents
+     * @param {number} uid 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ListsApi
+     */
+    public async getFavoritesListGames(uid: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<InlineResponse2002>>> {
+        return ListsApiFp(this.configuration).getFavoritesListGames(uid, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get List

@@ -21,7 +21,7 @@ import { APIError } from '../models';
 import { Game } from '../models';
 import { GameExt } from '../models';
 import { InlineResponse2001 } from '../models';
-import { InlineResponse2002 } from '../models';
+import { InlineResponse2003 } from '../models';
 import { InlineResponse204 } from '../models';
 import { PostGameParams } from '../models';
 import { Rating } from '../models';
@@ -1204,7 +1204,7 @@ export const GamesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getGameTags(id: number, userId?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse2002>>> {
+        async getGameTags(id: number, userId?: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse2003>>> {
             const localVarAxiosArgs = await GamesApiAxiosParamCreator(configuration).getGameTags(id, userId, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -1340,7 +1340,7 @@ export const GamesApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postGameSetTags(body: Array<any>, authorization: string, id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse2002>>> {
+        async postGameSetTags(body: Array<any>, authorization: string, id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse2003>>> {
             const localVarAxiosArgs = await GamesApiAxiosParamCreator(configuration).postGameSetTags(body, authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -1460,7 +1460,7 @@ export const GamesApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getGameTags(id: number, userId?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2002>> {
+        async getGameTags(id: number, userId?: number, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2003>> {
             return GamesApiFp(configuration).getGameTags(id, userId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1572,7 +1572,7 @@ export const GamesApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async postGameSetTags(body: Array<any>, authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2002>> {
+        async postGameSetTags(body: Array<any>, authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2003>> {
             return GamesApiFp(configuration).postGameSetTags(body, authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1693,7 +1693,7 @@ export class GamesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GamesApi
      */
-    public async getGameTags(id: number, userId?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse2002>> {
+    public async getGameTags(id: number, userId?: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse2003>> {
         return GamesApiFp(this.configuration).getGameTags(id, userId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
@@ -1811,7 +1811,7 @@ export class GamesApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof GamesApi
      */
-    public async postGameSetTags(body: Array<any>, authorization: string, id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse2002>> {
+    public async postGameSetTags(body: Array<any>, authorization: string, id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse2003>> {
         return GamesApiFp(this.configuration).postGameSetTags(body, authorization, id, options).then((request) => request(this.axios, this.basePath));
     }
     /**

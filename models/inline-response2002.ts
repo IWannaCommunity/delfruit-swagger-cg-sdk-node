@@ -19,4 +19,28 @@
  * @interface InlineResponse2002
  */
 export interface InlineResponse2002 {
+
+    /**
+     * @type {number}
+     * @memberof InlineResponse2002
+     */
+    rating: number;
+
+    /**
+     * @type {number}
+     * @memberof InlineResponse2002
+     */
+    difficulty: number;
+
+    /**
+     * @type {string}
+     * @memberof InlineResponse2002
+     */
+    gameName: string;
+
+    /**
+     * @type {number}
+     * @memberof InlineResponse2002
+     */
+    gameId: number;
 }
