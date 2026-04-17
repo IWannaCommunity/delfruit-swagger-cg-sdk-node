@@ -17,6 +17,8 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { APIError } from '../models';
+import { Game &amp; any } from '../models';
 import { InlineResponse2002 } from '../models';
 import { List } from '../models';
 /**
@@ -137,6 +139,46 @@ export const ListsApiAxiosParamCreator = function (configuration?: Configuration
             }
             const localVarPath = `/lists/favorites/{uid}`
                 .replace(`{${"uid"}}`, encodeURIComponent(String(uid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get Games from Owner
+         * @summary Get Games from Owner
+         * @param {number} ownerId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getGamesByOwner: async (ownerId: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'ownerId' is not null or undefined
+            if (ownerId === null || ownerId === undefined) {
+                throw new RequiredError('ownerId','Required parameter ownerId was null or undefined when calling getGamesByOwner.');
+            }
+            const localVarPath = `/lists/owned/{ownerId}`
+                .replace(`{${"ownerId"}}`, encodeURIComponent(String(ownerId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -499,6 +541,20 @@ export const ListsApiFp = function(configuration?: Configuration) {
             };
         },
         /**
+         * Get Games from Owner
+         * @summary Get Games from Owner
+         * @param {number} ownerId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getGamesByOwner(ownerId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Game & any>>>> {
+            const localVarAxiosArgs = await ListsApiAxiosParamCreator(configuration).getGamesByOwner(ownerId, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * Get List
          * @summary Get List
          * @param {string} authorization 
@@ -614,6 +670,16 @@ export const ListsApiFactory = function (configuration?: Configuration, basePath
             return ListsApiFp(configuration).getFavoritesListGames(uid, options).then((request) => request(axios, basePath));
         },
         /**
+         * Get Games from Owner
+         * @summary Get Games from Owner
+         * @param {number} ownerId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getGamesByOwner(ownerId: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Game & any>>> {
+            return ListsApiFp(configuration).getGamesByOwner(ownerId, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Get List
          * @summary Get List
          * @param {string} authorization 
@@ -711,6 +777,17 @@ export class ListsApi extends BaseAPI {
      */
     public async getFavoritesListGames(uid: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<InlineResponse2002>>> {
         return ListsApiFp(this.configuration).getFavoritesListGames(uid, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Get Games from Owner
+     * @summary Get Games from Owner
+     * @param {number} ownerId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ListsApi
+     */
+    public async getGamesByOwner(ownerId: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Game & any>>> {
+        return ListsApiFp(this.configuration).getGamesByOwner(ownerId, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get List
