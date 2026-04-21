@@ -17,6 +17,7 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { InlineResponse2002 } from '../models';
 import { Report } from '../models';
 /**
  * ReportsApi - axios parameter creator
@@ -38,6 +39,48 @@ export const ReportsApiAxiosParamCreator = function (configuration?: Configurati
             }
             const localVarPath = `/reports/{id}`
                 .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getReportCount: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/reports/totalcount`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -303,6 +346,18 @@ export const ReportsApiFp = function(configuration?: Configuration) {
             };
         },
         /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getReportCount(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse2002>>> {
+            const localVarAxiosArgs = await ReportsApiAxiosParamCreator(configuration).getReportCount(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * Report List (Admin Only)
          * @summary Repost List (Admin Only)
          * @param {number} [page] 
@@ -373,6 +428,14 @@ export const ReportsApiFactory = function (configuration?: Configuration, basePa
             return ReportsApiFp(configuration).getReport(id, options).then((request) => request(axios, basePath));
         },
         /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getReportCount(options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2002>> {
+            return ReportsApiFp(configuration).getReportCount(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Report List (Admin Only)
          * @summary Repost List (Admin Only)
          * @param {number} [page] 
@@ -431,6 +494,15 @@ export class ReportsApi extends BaseAPI {
      */
     public async getReport(id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Report>> {
         return ReportsApiFp(this.configuration).getReport(id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportsApi
+     */
+    public async getReportCount(options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse2002>> {
+        return ReportsApiFp(this.configuration).getReportCount(options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Report List (Admin Only)

@@ -19,7 +19,7 @@ import { Configuration } from '../configuration';
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { APIError } from '../models';
 import { Game &amp; any } from '../models';
-import { InlineResponse2002 } from '../models';
+import { InlineResponse2003 } from '../models';
 import { List } from '../models';
 /**
  * ListsApi - axios parameter creator
@@ -519,7 +519,7 @@ export const ListsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getClearListGames(uid: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<InlineResponse2002>>>> {
+        async getClearListGames(uid: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<InlineResponse2003>>>> {
             const localVarAxiosArgs = await ListsApiAxiosParamCreator(configuration).getClearListGames(uid, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -533,7 +533,7 @@ export const ListsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getFavoritesListGames(uid: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<InlineResponse2002>>>> {
+        async getFavoritesListGames(uid: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<InlineResponse2003>>>> {
             const localVarAxiosArgs = await ListsApiAxiosParamCreator(configuration).getFavoritesListGames(uid, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -656,7 +656,7 @@ export const ListsApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getClearListGames(uid: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<InlineResponse2002>>> {
+        async getClearListGames(uid: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<InlineResponse2003>>> {
             return ListsApiFp(configuration).getClearListGames(uid, options).then((request) => request(axios, basePath));
         },
         /**
@@ -666,7 +666,7 @@ export const ListsApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getFavoritesListGames(uid: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<InlineResponse2002>>> {
+        async getFavoritesListGames(uid: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<InlineResponse2003>>> {
             return ListsApiFp(configuration).getFavoritesListGames(uid, options).then((request) => request(axios, basePath));
         },
         /**
@@ -764,7 +764,7 @@ export class ListsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ListsApi
      */
-    public async getClearListGames(uid: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<InlineResponse2002>>> {
+    public async getClearListGames(uid: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<InlineResponse2003>>> {
         return ListsApiFp(this.configuration).getClearListGames(uid, options).then((request) => request(this.axios, this.basePath));
     }
     /**
@@ -775,7 +775,7 @@ export class ListsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ListsApi
      */
-    public async getFavoritesListGames(uid: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<InlineResponse2002>>> {
+    public async getFavoritesListGames(uid: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<InlineResponse2003>>> {
         return ListsApiFp(this.configuration).getFavoritesListGames(uid, options).then((request) => request(this.axios, this.basePath));
     }
     /**

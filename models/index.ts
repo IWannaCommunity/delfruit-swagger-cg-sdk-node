@@ -18,6 +18,7 @@ export * from './inline-response200';
 export * from './inline-response2001';
 export * from './inline-response2002';
 export * from './inline-response2003';
+export * from './inline-response2004';
 export * from './inline-response204';
 export * from './keys-to-camel-case-user-can-query-result_';
 export * from './list';
