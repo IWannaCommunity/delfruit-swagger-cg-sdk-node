@@ -93,12 +93,19 @@ export enum ReportTypeEnum {
     GameUpdateOwner = 'game_update_owner',
     GameUpdateCreator = 'game_update_creator',
     GameUpdate = 'game_update',
+    GameRestored = 'game_restored',
     User = 'user',
     UserRegister = 'user_register',
     UserPasswordChange = 'user_password_change',
     Review = 'review',
     ReviewRestore = 'review_restore',
+    ReviewReported = 'review_reported',
+    ReviewRemoved = 'review_removed',
     Screenshot = 'screenshot',
-    ScreenshotRemove = 'screenshot_remove'
+    ScreenshotRemove = 'screenshot_remove',
+    ScreenshotAdded = 'screenshot_added',
+    ScreenshotReported = 'screenshot_reported',
+    ScreenshotApproved = 'screenshot_approved',
+    ScreenshotDenied = 'screenshot_denied'
 }
 
