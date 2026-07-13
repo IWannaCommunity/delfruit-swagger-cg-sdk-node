@@ -28,6 +28,180 @@ import { List } from '../models';
 export const ListsApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
         /**
+         * Remove a Game from being bookmarked
+         * @summary Remove a Game from being bookmarked
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteBookmarkedGame: async (authorization: string, gid: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling deleteBookmarkedGame.');
+            }
+            // verify required parameter 'gid' is not null or undefined
+            if (gid === null || gid === undefined) {
+                throw new RequiredError('gid','Required parameter gid was null or undefined when calling deleteBookmarkedGame.');
+            }
+            const localVarPath = `/lists/bookmark/{gid}`
+                .replace(`{${"gid"}}`, encodeURIComponent(String(gid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Remove a Game from being cleared
+         * @summary Remove a Game from being cleared
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteClearedGame: async (authorization: string, gid: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling deleteClearedGame.');
+            }
+            // verify required parameter 'gid' is not null or undefined
+            if (gid === null || gid === undefined) {
+                throw new RequiredError('gid','Required parameter gid was null or undefined when calling deleteClearedGame.');
+            }
+            const localVarPath = `/lists/clear/{gid}`
+                .replace(`{${"gid"}}`, encodeURIComponent(String(gid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Remove a Game from being favorited
+         * @summary Remove a Game from being favorited
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        deleteFavoritedGame: async (authorization: string, gid: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling deleteFavoritedGame.');
+            }
+            // verify required parameter 'gid' is not null or undefined
+            if (gid === null || gid === undefined) {
+                throw new RequiredError('gid','Required parameter gid was null or undefined when calling deleteFavoritedGame.');
+            }
+            const localVarPath = `/lists/favorite/{gid}`
+                .replace(`{${"gid"}}`, encodeURIComponent(String(gid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'DELETE', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Delete List (User/Admin Only)
          * @summary Delete List (User/Admin Only)
          * @param {string} authorization 
@@ -188,6 +362,180 @@ export const ListsApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Check if User has Game bookmarked
+         * @summary Check if User has a Game bookmarked
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getIsGameBookmarked: async (authorization: string, gid: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling getIsGameBookmarked.');
+            }
+            // verify required parameter 'gid' is not null or undefined
+            if (gid === null || gid === undefined) {
+                throw new RequiredError('gid','Required parameter gid was null or undefined when calling getIsGameBookmarked.');
+            }
+            const localVarPath = `/lists/bookmark/{gid}`
+                .replace(`{${"gid"}}`, encodeURIComponent(String(gid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Check if User has Game cleared
+         * @summary Check if User has a Game cleared
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getIsGameCleared: async (authorization: string, gid: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling getIsGameCleared.');
+            }
+            // verify required parameter 'gid' is not null or undefined
+            if (gid === null || gid === undefined) {
+                throw new RequiredError('gid','Required parameter gid was null or undefined when calling getIsGameCleared.');
+            }
+            const localVarPath = `/lists/clear/{gid}`
+                .replace(`{${"gid"}}`, encodeURIComponent(String(gid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Check if User has Game favorited
+         * @summary Check if User has a Game favorited
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getIsGameFavorited: async (authorization: string, gid: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling getIsGameFavorited.');
+            }
+            // verify required parameter 'gid' is not null or undefined
+            if (gid === null || gid === undefined) {
+                throw new RequiredError('gid','Required parameter gid was null or undefined when calling getIsGameFavorited.');
+            }
+            const localVarPath = `/lists/favorite/{gid}`
+                .replace(`{${"gid"}}`, encodeURIComponent(String(gid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -422,6 +770,180 @@ export const ListsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
+         * Add Game to Bookmarks
+         * @summary Add Game to Bookmarks
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        putBookmarkGame: async (authorization: string, gid: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling putBookmarkGame.');
+            }
+            // verify required parameter 'gid' is not null or undefined
+            if (gid === null || gid === undefined) {
+                throw new RequiredError('gid','Required parameter gid was null or undefined when calling putBookmarkGame.');
+            }
+            const localVarPath = `/lists/bookmark/{gid}`
+                .replace(`{${"gid"}}`, encodeURIComponent(String(gid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Add Game to Clear
+         * @summary Add Game to Clear
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        putClearGame: async (authorization: string, gid: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling putClearGame.');
+            }
+            // verify required parameter 'gid' is not null or undefined
+            if (gid === null || gid === undefined) {
+                throw new RequiredError('gid','Required parameter gid was null or undefined when calling putClearGame.');
+            }
+            const localVarPath = `/lists/clear/{gid}`
+                .replace(`{${"gid"}}`, encodeURIComponent(String(gid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Add Game to Favorites
+         * @summary Add Game to Favorites
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        putFavoriteGame: async (authorization: string, gid: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling putFavoriteGame.');
+            }
+            // verify required parameter 'gid' is not null or undefined
+            if (gid === null || gid === undefined) {
+                throw new RequiredError('gid','Required parameter gid was null or undefined when calling putFavoriteGame.');
+            }
+            const localVarPath = `/lists/favorite/{gid}`
+                .replace(`{${"gid"}}`, encodeURIComponent(String(gid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'PUT', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Replace Games in List (User/Admin Only)
          * @summary Replace Games in List (User/Admin Only)
          * @param {any} body 
@@ -498,6 +1020,51 @@ export const ListsApiAxiosParamCreator = function (configuration?: Configuration
 export const ListsApiFp = function(configuration?: Configuration) {
     return {
         /**
+         * Remove a Game from being bookmarked
+         * @summary Remove a Game from being bookmarked
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteBookmarkedGame(authorization: string, gid: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+            const localVarAxiosArgs = await ListsApiAxiosParamCreator(configuration).deleteBookmarkedGame(authorization, gid, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Remove a Game from being cleared
+         * @summary Remove a Game from being cleared
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteClearedGame(authorization: string, gid: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+            const localVarAxiosArgs = await ListsApiAxiosParamCreator(configuration).deleteClearedGame(authorization, gid, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Remove a Game from being favorited
+         * @summary Remove a Game from being favorited
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteFavoritedGame(authorization: string, gid: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+            const localVarAxiosArgs = await ListsApiAxiosParamCreator(configuration).deleteFavoritedGame(authorization, gid, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * Delete List (User/Admin Only)
          * @summary Delete List (User/Admin Only)
          * @param {string} authorization 
@@ -549,6 +1116,51 @@ export const ListsApiFp = function(configuration?: Configuration) {
          */
         async getGamesByOwner(ownerId: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Game & any>>>> {
             const localVarAxiosArgs = await ListsApiAxiosParamCreator(configuration).getGamesByOwner(ownerId, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Check if User has Game bookmarked
+         * @summary Check if User has a Game bookmarked
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getIsGameBookmarked(authorization: string, gid: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<boolean>>> {
+            const localVarAxiosArgs = await ListsApiAxiosParamCreator(configuration).getIsGameBookmarked(authorization, gid, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Check if User has Game cleared
+         * @summary Check if User has a Game cleared
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getIsGameCleared(authorization: string, gid: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<boolean>>> {
+            const localVarAxiosArgs = await ListsApiAxiosParamCreator(configuration).getIsGameCleared(authorization, gid, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Check if User has Game favorited
+         * @summary Check if User has a Game favorited
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getIsGameFavorited(authorization: string, gid: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<boolean>>> {
+            const localVarAxiosArgs = await ListsApiAxiosParamCreator(configuration).getIsGameFavorited(authorization, gid, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -614,6 +1226,51 @@ export const ListsApiFp = function(configuration?: Configuration) {
             };
         },
         /**
+         * Add Game to Bookmarks
+         * @summary Add Game to Bookmarks
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async putBookmarkGame(authorization: string, gid: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+            const localVarAxiosArgs = await ListsApiAxiosParamCreator(configuration).putBookmarkGame(authorization, gid, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Add Game to Clear
+         * @summary Add Game to Clear
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async putClearGame(authorization: string, gid: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+            const localVarAxiosArgs = await ListsApiAxiosParamCreator(configuration).putClearGame(authorization, gid, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Add Game to Favorites
+         * @summary Add Game to Favorites
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async putFavoriteGame(authorization: string, gid: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<void>>> {
+            const localVarAxiosArgs = await ListsApiAxiosParamCreator(configuration).putFavoriteGame(authorization, gid, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * Replace Games in List (User/Admin Only)
          * @summary Replace Games in List (User/Admin Only)
          * @param {any} body 
@@ -638,6 +1295,39 @@ export const ListsApiFp = function(configuration?: Configuration) {
  */
 export const ListsApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     return {
+        /**
+         * Remove a Game from being bookmarked
+         * @summary Remove a Game from being bookmarked
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteBookmarkedGame(authorization: string, gid: number, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+            return ListsApiFp(configuration).deleteBookmarkedGame(authorization, gid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Remove a Game from being cleared
+         * @summary Remove a Game from being cleared
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteClearedGame(authorization: string, gid: number, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+            return ListsApiFp(configuration).deleteClearedGame(authorization, gid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Remove a Game from being favorited
+         * @summary Remove a Game from being favorited
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async deleteFavoritedGame(authorization: string, gid: number, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+            return ListsApiFp(configuration).deleteFavoritedGame(authorization, gid, options).then((request) => request(axios, basePath));
+        },
         /**
          * Delete List (User/Admin Only)
          * @summary Delete List (User/Admin Only)
@@ -678,6 +1368,39 @@ export const ListsApiFactory = function (configuration?: Configuration, basePath
          */
         async getGamesByOwner(ownerId: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Game & any>>> {
             return ListsApiFp(configuration).getGamesByOwner(ownerId, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Check if User has Game bookmarked
+         * @summary Check if User has a Game bookmarked
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getIsGameBookmarked(authorization: string, gid: number, options?: AxiosRequestConfig): Promise<AxiosResponse<boolean>> {
+            return ListsApiFp(configuration).getIsGameBookmarked(authorization, gid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Check if User has Game cleared
+         * @summary Check if User has a Game cleared
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getIsGameCleared(authorization: string, gid: number, options?: AxiosRequestConfig): Promise<AxiosResponse<boolean>> {
+            return ListsApiFp(configuration).getIsGameCleared(authorization, gid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Check if User has Game favorited
+         * @summary Check if User has a Game favorited
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getIsGameFavorited(authorization: string, gid: number, options?: AxiosRequestConfig): Promise<AxiosResponse<boolean>> {
+            return ListsApiFp(configuration).getIsGameFavorited(authorization, gid, options).then((request) => request(axios, basePath));
         },
         /**
          * Get List
@@ -723,6 +1446,39 @@ export const ListsApiFactory = function (configuration?: Configuration, basePath
             return ListsApiFp(configuration).postList(body, authorization, options).then((request) => request(axios, basePath));
         },
         /**
+         * Add Game to Bookmarks
+         * @summary Add Game to Bookmarks
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async putBookmarkGame(authorization: string, gid: number, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+            return ListsApiFp(configuration).putBookmarkGame(authorization, gid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Add Game to Clear
+         * @summary Add Game to Clear
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async putClearGame(authorization: string, gid: number, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+            return ListsApiFp(configuration).putClearGame(authorization, gid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Add Game to Favorites
+         * @summary Add Game to Favorites
+         * @param {string} authorization 
+         * @param {number} gid 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async putFavoriteGame(authorization: string, gid: number, options?: AxiosRequestConfig): Promise<AxiosResponse<void>> {
+            return ListsApiFp(configuration).putFavoriteGame(authorization, gid, options).then((request) => request(axios, basePath));
+        },
+        /**
          * Replace Games in List (User/Admin Only)
          * @summary Replace Games in List (User/Admin Only)
          * @param {any} body 
@@ -744,6 +1500,42 @@ export const ListsApiFactory = function (configuration?: Configuration, basePath
  * @extends {BaseAPI}
  */
 export class ListsApi extends BaseAPI {
+    /**
+     * Remove a Game from being bookmarked
+     * @summary Remove a Game from being bookmarked
+     * @param {string} authorization 
+     * @param {number} gid 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ListsApi
+     */
+    public async deleteBookmarkedGame(authorization: string, gid: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+        return ListsApiFp(this.configuration).deleteBookmarkedGame(authorization, gid, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Remove a Game from being cleared
+     * @summary Remove a Game from being cleared
+     * @param {string} authorization 
+     * @param {number} gid 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ListsApi
+     */
+    public async deleteClearedGame(authorization: string, gid: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+        return ListsApiFp(this.configuration).deleteClearedGame(authorization, gid, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Remove a Game from being favorited
+     * @summary Remove a Game from being favorited
+     * @param {string} authorization 
+     * @param {number} gid 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ListsApi
+     */
+    public async deleteFavoritedGame(authorization: string, gid: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+        return ListsApiFp(this.configuration).deleteFavoritedGame(authorization, gid, options).then((request) => request(this.axios, this.basePath));
+    }
     /**
      * Delete List (User/Admin Only)
      * @summary Delete List (User/Admin Only)
@@ -788,6 +1580,42 @@ export class ListsApi extends BaseAPI {
      */
     public async getGamesByOwner(ownerId: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Game & any>>> {
         return ListsApiFp(this.configuration).getGamesByOwner(ownerId, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Check if User has Game bookmarked
+     * @summary Check if User has a Game bookmarked
+     * @param {string} authorization 
+     * @param {number} gid 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ListsApi
+     */
+    public async getIsGameBookmarked(authorization: string, gid: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<boolean>> {
+        return ListsApiFp(this.configuration).getIsGameBookmarked(authorization, gid, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Check if User has Game cleared
+     * @summary Check if User has a Game cleared
+     * @param {string} authorization 
+     * @param {number} gid 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ListsApi
+     */
+    public async getIsGameCleared(authorization: string, gid: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<boolean>> {
+        return ListsApiFp(this.configuration).getIsGameCleared(authorization, gid, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Check if User has Game favorited
+     * @summary Check if User has a Game favorited
+     * @param {string} authorization 
+     * @param {number} gid 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ListsApi
+     */
+    public async getIsGameFavorited(authorization: string, gid: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<boolean>> {
+        return ListsApiFp(this.configuration).getIsGameFavorited(authorization, gid, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get List
@@ -835,6 +1663,42 @@ export class ListsApi extends BaseAPI {
      */
     public async postList(body: List, authorization: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array>> {
         return ListsApiFp(this.configuration).postList(body, authorization, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Add Game to Bookmarks
+     * @summary Add Game to Bookmarks
+     * @param {string} authorization 
+     * @param {number} gid 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ListsApi
+     */
+    public async putBookmarkGame(authorization: string, gid: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+        return ListsApiFp(this.configuration).putBookmarkGame(authorization, gid, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Add Game to Clear
+     * @summary Add Game to Clear
+     * @param {string} authorization 
+     * @param {number} gid 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ListsApi
+     */
+    public async putClearGame(authorization: string, gid: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+        return ListsApiFp(this.configuration).putClearGame(authorization, gid, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Add Game to Favorites
+     * @summary Add Game to Favorites
+     * @param {string} authorization 
+     * @param {number} gid 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ListsApi
+     */
+    public async putFavoriteGame(authorization: string, gid: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<void>> {
+        return ListsApiFp(this.configuration).putFavoriteGame(authorization, gid, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Replace Games in List (User/Admin Only)
