@@ -87,6 +87,7 @@ export interface Report {
  */
 export enum ReportTypeEnum {
     Game = 'game',
+    GameReported = 'game_reported',
     GameAdd = 'game_add',
     GameRemove = 'game_remove',
     GameUpdateUrl = 'game_update_url',
