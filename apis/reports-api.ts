@@ -79,7 +79,7 @@ export const ReportsApiAxiosParamCreator = function (configuration?: Configurati
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getReportCount: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getReportCount2: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/reports/totalcount`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -350,8 +350,8 @@ export const ReportsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getReportCount(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse2002>>> {
-            const localVarAxiosArgs = await ReportsApiAxiosParamCreator(configuration).getReportCount(options);
+        async getReportCount2(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse2002>>> {
+            const localVarAxiosArgs = await ReportsApiAxiosParamCreator(configuration).getReportCount2(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -432,8 +432,8 @@ export const ReportsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getReportCount(options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2002>> {
-            return ReportsApiFp(configuration).getReportCount(options).then((request) => request(axios, basePath));
+        async getReportCount2(options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2002>> {
+            return ReportsApiFp(configuration).getReportCount2(options).then((request) => request(axios, basePath));
         },
         /**
          * Report List (Admin Only)
@@ -501,8 +501,8 @@ export class ReportsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ReportsApi
      */
-    public async getReportCount(options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse2002>> {
-        return ReportsApiFp(this.configuration).getReportCount(options).then((request) => request(this.axios, this.basePath));
+    public async getReportCount2(options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse2002>> {
+        return ReportsApiFp(this.configuration).getReportCount2(options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Report List (Admin Only)
