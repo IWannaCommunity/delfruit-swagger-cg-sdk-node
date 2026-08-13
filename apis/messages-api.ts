@@ -27,6 +27,63 @@ export const MessagesApiAxiosParamCreator = function (configuration?: Configurat
         /**
          * 
          * @param {string} authorization 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getMessageById: async (authorization: string, id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling getMessageById.');
+            }
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling getMessageById.');
+            }
+            const localVarPath = `/message/legacy/{id}`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {string} authorization 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -315,6 +372,20 @@ export const MessagesApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} authorization 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getMessageById(authorization: string, id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<any>>> {
+            const localVarAxiosArgs = await MessagesApiAxiosParamCreator(configuration).getMessageById(authorization, id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @param {string} authorization 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -392,6 +463,16 @@ export const MessagesApiFactory = function (configuration?: Configuration, baseP
         /**
          * 
          * @param {string} authorization 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getMessageById(authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<any>> {
+            return MessagesApiFp(configuration).getMessageById(authorization, id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {string} authorization 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
@@ -447,6 +528,17 @@ export const MessagesApiFactory = function (configuration?: Configuration, baseP
  * @extends {BaseAPI}
  */
 export class MessagesApi extends BaseAPI {
+    /**
+     * 
+     * @param {string} authorization 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof MessagesApi
+     */
+    public async getMessageById(authorization: string, id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<any>> {
+        return MessagesApiFp(this.configuration).getMessageById(authorization, id, options).then((request) => request(this.axios, this.basePath));
+    }
     /**
      * 
      * @param {string} authorization 
