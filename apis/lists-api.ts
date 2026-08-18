@@ -263,10 +263,15 @@ export const ListsApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * Get Bookmark List Contents
          * @summary Get Bookmark List Contents
+         * @param {string} authorization 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getBookmarkedGames: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getBookmarkedGames: async (authorization: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling getBookmarkedGames.');
+            }
             const localVarPath = `/lists/bookmarks`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -277,6 +282,10 @@ export const ListsApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -377,10 +386,15 @@ export const ListsApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * Get Following List Contents
          * @summary Get Following List Contents
+         * @param {string} authorization 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getFollowingUsers: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getFollowingUsers: async (authorization: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'authorization' is not null or undefined
+            if (authorization === null || authorization === undefined) {
+                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling getFollowingUsers.');
+            }
             const localVarPath = `/lists/following`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -391,6 +405,10 @@ export const ListsApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (authorization !== undefined && authorization !== null) {
+                localVarHeaderParameter['Authorization'] = String(authorization);
+            }
 
             const query = new URLSearchParams(localVarUrlObj.search);
             for (const key in localVarQueryParameter) {
@@ -1151,11 +1169,12 @@ export const ListsApiFp = function(configuration?: Configuration) {
         /**
          * Get Bookmark List Contents
          * @summary Get Bookmark List Contents
+         * @param {string} authorization 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getBookmarkedGames(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<InlineResponse2003>>>> {
-            const localVarAxiosArgs = await ListsApiAxiosParamCreator(configuration).getBookmarkedGames(options);
+        async getBookmarkedGames(authorization: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<InlineResponse2003>>>> {
+            const localVarAxiosArgs = await ListsApiAxiosParamCreator(configuration).getBookmarkedGames(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1192,11 +1211,12 @@ export const ListsApiFp = function(configuration?: Configuration) {
         /**
          * Get Following List Contents
          * @summary Get Following List Contents
+         * @param {string} authorization 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getFollowingUsers(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<InlineResponse2004>>>> {
-            const localVarAxiosArgs = await ListsApiAxiosParamCreator(configuration).getFollowingUsers(options);
+        async getFollowingUsers(authorization: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<InlineResponse2004>>>> {
+            const localVarAxiosArgs = await ListsApiAxiosParamCreator(configuration).getFollowingUsers(authorization, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1437,11 +1457,12 @@ export const ListsApiFactory = function (configuration?: Configuration, basePath
         /**
          * Get Bookmark List Contents
          * @summary Get Bookmark List Contents
+         * @param {string} authorization 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getBookmarkedGames(options?: AxiosRequestConfig): Promise<AxiosResponse<Array<InlineResponse2003>>> {
-            return ListsApiFp(configuration).getBookmarkedGames(options).then((request) => request(axios, basePath));
+        async getBookmarkedGames(authorization: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<InlineResponse2003>>> {
+            return ListsApiFp(configuration).getBookmarkedGames(authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * Get Clear List Contents
@@ -1466,11 +1487,12 @@ export const ListsApiFactory = function (configuration?: Configuration, basePath
         /**
          * Get Following List Contents
          * @summary Get Following List Contents
+         * @param {string} authorization 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getFollowingUsers(options?: AxiosRequestConfig): Promise<AxiosResponse<Array<InlineResponse2004>>> {
-            return ListsApiFp(configuration).getFollowingUsers(options).then((request) => request(axios, basePath));
+        async getFollowingUsers(authorization: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<InlineResponse2004>>> {
+            return ListsApiFp(configuration).getFollowingUsers(authorization, options).then((request) => request(axios, basePath));
         },
         /**
          * Get Games from Owner
@@ -1664,12 +1686,13 @@ export class ListsApi extends BaseAPI {
     /**
      * Get Bookmark List Contents
      * @summary Get Bookmark List Contents
+     * @param {string} authorization 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ListsApi
      */
-    public async getBookmarkedGames(options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<InlineResponse2003>>> {
-        return ListsApiFp(this.configuration).getBookmarkedGames(options).then((request) => request(this.axios, this.basePath));
+    public async getBookmarkedGames(authorization: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<InlineResponse2003>>> {
+        return ListsApiFp(this.configuration).getBookmarkedGames(authorization, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get Clear List Contents
@@ -1696,12 +1719,13 @@ export class ListsApi extends BaseAPI {
     /**
      * Get Following List Contents
      * @summary Get Following List Contents
+     * @param {string} authorization 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ListsApi
      */
-    public async getFollowingUsers(options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<InlineResponse2004>>> {
-        return ListsApiFp(this.configuration).getFollowingUsers(options).then((request) => request(this.axios, this.basePath));
+    public async getFollowingUsers(authorization: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<InlineResponse2004>>> {
+        return ListsApiFp(this.configuration).getFollowingUsers(authorization, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get Games from Owner
