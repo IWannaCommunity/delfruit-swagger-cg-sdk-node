@@ -20,6 +20,7 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 import { APIError } from '../models';
 import { Game &amp; any } from '../models';
 import { InlineResponse2003 } from '../models';
+import { InlineResponse2004 } from '../models';
 import { List } from '../models';
 /**
  * ListsApi - axios parameter creator
@@ -260,6 +261,40 @@ export const ListsApiAxiosParamCreator = function (configuration?: Configuration
             };
         },
         /**
+         * Get Bookmark List Contents
+         * @summary Get Bookmark List Contents
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getBookmarkedGames: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/lists/bookmarks`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
          * Get Clear List Contents
          * @summary Get Clear List Contents
          * @param {number} uid 
@@ -313,6 +348,40 @@ export const ListsApiAxiosParamCreator = function (configuration?: Configuration
             }
             const localVarPath = `/lists/favorites/{uid}`
                 .replace(`{${"uid"}}`, encodeURIComponent(String(uid)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * Get Following List Contents
+         * @summary Get Following List Contents
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getFollowingUsers: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/lists/following`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
             let baseOptions;
@@ -1080,6 +1149,19 @@ export const ListsApiFp = function(configuration?: Configuration) {
             };
         },
         /**
+         * Get Bookmark List Contents
+         * @summary Get Bookmark List Contents
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getBookmarkedGames(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<InlineResponse2003>>>> {
+            const localVarAxiosArgs = await ListsApiAxiosParamCreator(configuration).getBookmarkedGames(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
          * Get Clear List Contents
          * @summary Get Clear List Contents
          * @param {number} uid 
@@ -1102,6 +1184,19 @@ export const ListsApiFp = function(configuration?: Configuration) {
          */
         async getFavoritesListGames(uid: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<InlineResponse2003>>>> {
             const localVarAxiosArgs = await ListsApiAxiosParamCreator(configuration).getFavoritesListGames(uid, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * Get Following List Contents
+         * @summary Get Following List Contents
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getFollowingUsers(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<InlineResponse2004>>>> {
+            const localVarAxiosArgs = await ListsApiAxiosParamCreator(configuration).getFollowingUsers(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1340,6 +1435,15 @@ export const ListsApiFactory = function (configuration?: Configuration, basePath
             return ListsApiFp(configuration).deleteList(authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
+         * Get Bookmark List Contents
+         * @summary Get Bookmark List Contents
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getBookmarkedGames(options?: AxiosRequestConfig): Promise<AxiosResponse<Array<InlineResponse2003>>> {
+            return ListsApiFp(configuration).getBookmarkedGames(options).then((request) => request(axios, basePath));
+        },
+        /**
          * Get Clear List Contents
          * @summary Get Clear List Contents
          * @param {number} uid 
@@ -1358,6 +1462,15 @@ export const ListsApiFactory = function (configuration?: Configuration, basePath
          */
         async getFavoritesListGames(uid: number, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<InlineResponse2003>>> {
             return ListsApiFp(configuration).getFavoritesListGames(uid, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * Get Following List Contents
+         * @summary Get Following List Contents
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getFollowingUsers(options?: AxiosRequestConfig): Promise<AxiosResponse<Array<InlineResponse2004>>> {
+            return ListsApiFp(configuration).getFollowingUsers(options).then((request) => request(axios, basePath));
         },
         /**
          * Get Games from Owner
@@ -1549,6 +1662,16 @@ export class ListsApi extends BaseAPI {
         return ListsApiFp(this.configuration).deleteList(authorization, id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
+     * Get Bookmark List Contents
+     * @summary Get Bookmark List Contents
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ListsApi
+     */
+    public async getBookmarkedGames(options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<InlineResponse2003>>> {
+        return ListsApiFp(this.configuration).getBookmarkedGames(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
      * Get Clear List Contents
      * @summary Get Clear List Contents
      * @param {number} uid 
@@ -1569,6 +1692,16 @@ export class ListsApi extends BaseAPI {
      */
     public async getFavoritesListGames(uid: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<InlineResponse2003>>> {
         return ListsApiFp(this.configuration).getFavoritesListGames(uid, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * Get Following List Contents
+     * @summary Get Following List Contents
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ListsApi
+     */
+    public async getFollowingUsers(options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<InlineResponse2004>>> {
+        return ListsApiFp(this.configuration).getFollowingUsers(options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get Games from Owner

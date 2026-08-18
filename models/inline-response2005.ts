@@ -16,19 +16,7 @@
  * 
  *
  * @export
- * @interface InlineResponse2004
+ * @interface InlineResponse2005
  */
-export interface InlineResponse2004 {
-
-    /**
-     * @type {string}
-     * @memberof InlineResponse2004
-     */
-    name: string;
-
-    /**
-     * @type {number}
-     * @memberof InlineResponse2004
-     */
-    userId: number;
+export interface InlineResponse2005 {
 }
