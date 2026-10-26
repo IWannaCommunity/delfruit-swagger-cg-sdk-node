@@ -25,6 +25,7 @@ import { KeysToCamelCaseUserCanQueryResult_ } from '../models';
 import { OmitUserEmailOrIsAdminOrCanReportOrCanSubmitOrCanReviewOrCanScreenshotOrBanned_ } from '../models';
 import { OmitUserExtRatingsCountOrScreenshotCount_ } from '../models';
 import { PartialUserCan_ } from '../models';
+import { PatchUserTemporary } from '../models';
 import { Permission } from '../models';
 import { Problem } from '../models';
 import { Review } from '../models';
@@ -32,7 +33,6 @@ import { User } from '../models';
 import { UserCan } from '../models';
 import { UserExt } from '../models';
 import { UserRegistration } from '../models';
-import { UsersIdBody } from '../models';
 /**
  * UsersApi - axios parameter creator
  * @export
@@ -644,13 +644,13 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * Updates a user. If a password is provided, then the old password must also be provided.
          * @summary Modify User (User/Admin Only)
-         * @param {UsersIdBody} body 
+         * @param {PatchUserTemporary} body 
          * @param {string} authorization 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        patchUser: async (body: UsersIdBody, authorization: string, id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        patchUser: async (body: PatchUserTemporary, authorization: string, id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'body' is not null or undefined
             if (body === null || body === undefined) {
                 throw new RequiredError('body','Required parameter body was null or undefined when calling patchUser.');
@@ -1125,13 +1125,13 @@ export const UsersApiFp = function(configuration?: Configuration) {
         /**
          * Updates a user. If a password is provided, then the old password must also be provided.
          * @summary Modify User (User/Admin Only)
-         * @param {UsersIdBody} body 
+         * @param {PatchUserTemporary} body 
          * @param {string} authorization 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async patchUser(body: UsersIdBody, authorization: string, id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<User>>> {
+        async patchUser(body: PatchUserTemporary, authorization: string, id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<User>>> {
             const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).patchUser(body, authorization, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -1339,13 +1339,13 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
         /**
          * Updates a user. If a password is provided, then the old password must also be provided.
          * @summary Modify User (User/Admin Only)
-         * @param {UsersIdBody} body 
+         * @param {PatchUserTemporary} body 
          * @param {string} authorization 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async patchUser(body: UsersIdBody, authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<User>> {
+        async patchUser(body: PatchUserTemporary, authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<User>> {
             return UsersApiFp(configuration).patchUser(body, authorization, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1545,14 +1545,14 @@ export class UsersApi extends BaseAPI {
     /**
      * Updates a user. If a password is provided, then the old password must also be provided.
      * @summary Modify User (User/Admin Only)
-     * @param {UsersIdBody} body 
+     * @param {PatchUserTemporary} body 
      * @param {string} authorization 
      * @param {number} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    public async patchUser(body: UsersIdBody, authorization: string, id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<User>> {
+    public async patchUser(body: PatchUserTemporary, authorization: string, id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<User>> {
         return UsersApiFp(this.configuration).patchUser(body, authorization, id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
