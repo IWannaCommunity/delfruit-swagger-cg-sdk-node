@@ -103,6 +103,12 @@ export interface GameExt {
     ownerBio?: string;
 
     /**
+     * @type {number}
+     * @memberof GameExt
+     */
+    favorited: number;
+
+    /**
      * @type {GameExtRatings}
      * @memberof GameExt
      */
