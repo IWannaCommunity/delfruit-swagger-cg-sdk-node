@@ -42,13 +42,13 @@ export interface Review {
      * @type {number}
      * @memberof Review
      */
-    rating?: number;
+    rating?: number | null;
 
     /**
      * @type {number}
      * @memberof Review
      */
-    difficulty?: number;
+    difficulty?: number | null;
 
     /**
      * @type {string}
