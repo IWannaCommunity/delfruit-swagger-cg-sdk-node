@@ -27,10 +27,10 @@ export interface PostGameParams {
     ownerId?: string;
 
     /**
-     * @type {Date}
+     * @type {Date | string}
      * @memberof PostGameParams
      */
-    dateCreated?: Date;
+    dateCreated?: Date | string;
 
     /**
      * @type {boolean}
