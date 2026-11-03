@@ -20,7 +20,9 @@ import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } fr
 import { APIError } from '../models';
 import { Badge } from '../models';
 import { EditUserPermissionsParam } from '../models';
+import { IdEmailBody } from '../models';
 import { InlineResponse200 } from '../models';
+import { InlineResponse2001 } from '../models';
 import { KeysToCamelCaseUserCanQueryResult_ } from '../models';
 import { OmitUserEmailOrIsAdminOrCanReportOrCanSubmitOrCanReviewOrCanScreenshotOrBanned_ } from '../models';
 import { OmitUserExtRatingsCountOrScreenshotCount_ } from '../models';
@@ -767,6 +769,63 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
+         * @param {IdEmailBody} body 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        patchUserEmail: async (body: IdEmailBody, id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'body' is not null or undefined
+            if (body === null || body === undefined) {
+                throw new RequiredError('body','Required parameter body was null or undefined when calling patchUserEmail.');
+            }
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling patchUserEmail.');
+            }
+            const localVarPath = `/users/{id}/email`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
+            localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {number} uid 
          * @param {Permission} pid 
          * @param {EditUserPermissionsParam} [body] 
@@ -870,6 +929,54 @@ export const UsersApiAxiosParamCreator = function (configuration?: Configuration
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
             const needsSerialization = (typeof body !== "string") || localVarRequestOptions.headers['Content-Type'] === 'application/json';
             localVarRequestOptions.data =  needsSerialization ? JSON.stringify(body !== undefined ? body : {}) : (body || "");
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        postUserResendRegistrationEmail: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'id' is not null or undefined
+            if (id === null || id === undefined) {
+                throw new RequiredError('id','Required parameter id was null or undefined when calling postUserResendRegistrationEmail.');
+            }
+            const localVarPath = `/users/{id}/resend_registration_email`
+                .replace(`{${"id"}}`, encodeURIComponent(String(id)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'POST', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            // authentication bearerAuth required
+            // http bearer authentication required
+            if (configuration && configuration.accessToken) {
+                const accessToken = typeof configuration.accessToken === 'function'
+                    ? await configuration.accessToken()
+                    : await configuration.accessToken;
+                localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
+            }
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
 
             return {
                 url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
@@ -1154,6 +1261,20 @@ export const UsersApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {IdEmailBody} body 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async patchUserEmail(body: IdEmailBody, id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse2001>>> {
+            const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).patchUserEmail(body, id, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
          * @param {number} uid 
          * @param {Permission} pid 
          * @param {EditUserPermissionsParam} [body] 
@@ -1177,6 +1298,19 @@ export const UsersApiFp = function(configuration?: Configuration) {
          */
         async postUser(body: UserRegistration, cFTurnstileProof: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<any>>> {
             const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).postUser(body, cFTurnstileProof, options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async postUserResendRegistrationEmail(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse2001>>> {
+            const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).postUserResendRegistrationEmail(id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -1360,6 +1494,16 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
+         * @param {IdEmailBody} body 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async patchUserEmail(body: IdEmailBody, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2001>> {
+            return UsersApiFp(configuration).patchUserEmail(body, id, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {number} uid 
          * @param {Permission} pid 
          * @param {EditUserPermissionsParam} [body] 
@@ -1379,6 +1523,15 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          */
         async postUser(body: UserRegistration, cFTurnstileProof: string, options?: AxiosRequestConfig): Promise<AxiosResponse<any>> {
             return UsersApiFp(configuration).postUser(body, cFTurnstileProof, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {number} id 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async postUserResendRegistrationEmail(id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2001>> {
+            return UsersApiFp(configuration).postUserResendRegistrationEmail(id, options).then((request) => request(axios, basePath));
         },
         /**
          * Adds a user to your following list. Idempotent.
@@ -1568,6 +1721,17 @@ export class UsersApi extends BaseAPI {
     }
     /**
      * 
+     * @param {IdEmailBody} body 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public async patchUserEmail(body: IdEmailBody, id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse2001>> {
+        return UsersApiFp(this.configuration).patchUserEmail(body, id, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
      * @param {number} uid 
      * @param {Permission} pid 
      * @param {EditUserPermissionsParam} [body] 
@@ -1589,6 +1753,16 @@ export class UsersApi extends BaseAPI {
      */
     public async postUser(body: UserRegistration, cFTurnstileProof: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<any>> {
         return UsersApiFp(this.configuration).postUser(body, cFTurnstileProof, options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {number} id 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UsersApi
+     */
+    public async postUserResendRegistrationEmail(id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse2001>> {
+        return UsersApiFp(this.configuration).postUserResendRegistrationEmail(id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Adds a user to your following list. Idempotent.

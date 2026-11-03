@@ -17,7 +17,7 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
-import { InlineResponse2002 } from '../models';
+import { InlineResponse2003 } from '../models';
 import { Report } from '../models';
 /**
  * ReportsApi - axios parameter creator
@@ -350,7 +350,7 @@ export const ReportsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getReportCount2(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse2002>>> {
+        async getReportCount2(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse2003>>> {
             const localVarAxiosArgs = await ReportsApiAxiosParamCreator(configuration).getReportCount2(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -432,7 +432,7 @@ export const ReportsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getReportCount2(options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2002>> {
+        async getReportCount2(options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2003>> {
             return ReportsApiFp(configuration).getReportCount2(options).then((request) => request(axios, basePath));
         },
         /**
@@ -501,7 +501,7 @@ export class ReportsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ReportsApi
      */
-    public async getReportCount2(options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse2002>> {
+    public async getReportCount2(options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse2003>> {
         return ReportsApiFp(this.configuration).getReportCount2(options).then((request) => request(this.axios, this.basePath));
     }
     /**

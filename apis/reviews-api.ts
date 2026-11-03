@@ -18,7 +18,7 @@ import { Configuration } from '../configuration';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
 import { APIError } from '../models';
-import { InlineResponse2001 } from '../models';
+import { InlineResponse2002 } from '../models';
 import { Review } from '../models';
 /**
  * ReviewsApi - axios parameter creator
@@ -648,7 +648,7 @@ export const ReviewsApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getReviewCount(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse2001>>> {
+        async getReviewCount(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse2002>>> {
             const localVarAxiosArgs = await ReviewsApiAxiosParamCreator(configuration).getReviewCount(options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -795,7 +795,7 @@ export const ReviewsApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getReviewCount(options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2001>> {
+        async getReviewCount(options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2002>> {
             return ReviewsApiFp(configuration).getReviewCount(options).then((request) => request(axios, basePath));
         },
         /**
@@ -923,7 +923,7 @@ export class ReviewsApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof ReviewsApi
      */
-    public async getReviewCount(options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse2001>> {
+    public async getReviewCount(options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse2002>> {
         return ReviewsApiFp(this.configuration).getReviewCount(options).then((request) => request(this.axios, this.basePath));
     }
     /**
