@@ -27,16 +27,11 @@ export const ScreenshotsApiAxiosParamCreator = function (configuration?: Configu
     return {
         /**
          * 
-         * @param {string} authorization 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        deleteScreenshot: async (authorization: string, id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'authorization' is not null or undefined
-            if (authorization === null || authorization === undefined) {
-                throw new RequiredError('authorization','Required parameter authorization was null or undefined when calling deleteScreenshot.');
-            }
+        deleteScreenshot: async (id: number, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'id' is not null or undefined
             if (id === null || id === undefined) {
                 throw new RequiredError('id','Required parameter id was null or undefined when calling deleteScreenshot.');
@@ -60,10 +55,6 @@ export const ScreenshotsApiAxiosParamCreator = function (configuration?: Configu
                     ? await configuration.accessToken()
                     : await configuration.accessToken;
                 localVarHeaderParameter["Authorization"] = "Bearer " + accessToken;
-            }
-
-            if (authorization !== undefined && authorization !== null) {
-                localVarHeaderParameter['authorization'] = String(authorization);
             }
 
             const query = new URLSearchParams(localVarUrlObj.search);
@@ -427,13 +418,12 @@ export const ScreenshotsApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {string} authorization 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteScreenshot(authorization: string, id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<APIError>>> {
-            const localVarAxiosArgs = await ScreenshotsApiAxiosParamCreator(configuration).deleteScreenshot(authorization, id, options);
+        async deleteScreenshot(id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<APIError>>> {
+            const localVarAxiosArgs = await ScreenshotsApiAxiosParamCreator(configuration).deleteScreenshot(id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -537,13 +527,12 @@ export const ScreenshotsApiFactory = function (configuration?: Configuration, ba
     return {
         /**
          * 
-         * @param {string} authorization 
          * @param {number} id 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async deleteScreenshot(authorization: string, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<APIError>> {
-            return ScreenshotsApiFp(configuration).deleteScreenshot(authorization, id, options).then((request) => request(axios, basePath));
+        async deleteScreenshot(id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<APIError>> {
+            return ScreenshotsApiFp(configuration).deleteScreenshot(id, options).then((request) => request(axios, basePath));
         },
         /**
          * Get Screenshots for Game
@@ -624,14 +613,13 @@ export const ScreenshotsApiFactory = function (configuration?: Configuration, ba
 export class ScreenshotsApi extends BaseAPI {
     /**
      * 
-     * @param {string} authorization 
      * @param {number} id 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ScreenshotsApi
      */
-    public async deleteScreenshot(authorization: string, id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<APIError>> {
-        return ScreenshotsApiFp(this.configuration).deleteScreenshot(authorization, id, options).then((request) => request(this.axios, this.basePath));
+    public async deleteScreenshot(id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<APIError>> {
+        return ScreenshotsApiFp(this.configuration).deleteScreenshot(id, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Get Screenshots for Game
