@@ -90,7 +90,7 @@ export interface Game {
      * @type {string}
      * @memberof Game
      */
-    ownerId?: string;
+    ownerId?: string | null;
 
     /**
      * @type {string}

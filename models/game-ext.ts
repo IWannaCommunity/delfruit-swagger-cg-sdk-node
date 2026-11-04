@@ -94,7 +94,7 @@ export interface GameExt {
      * @type {string}
      * @memberof GameExt
      */
-    ownerId?: string;
+    ownerId?: string | null;
 
     /**
      * @type {string}
