@@ -101,12 +101,12 @@ export enum ReportTypeEnum {
     Review = 'review',
     ReviewRestore = 'review_restore',
     ReviewReported = 'review_reported',
-    ReviewRemoved = 'review_removed',
+    ReviewRemove = 'review_remove',
     Screenshot = 'screenshot',
     ScreenshotRemove = 'screenshot_remove',
-    ScreenshotAdded = 'screenshot_added',
+    ScreenshotAdd = 'screenshot_add',
     ScreenshotReported = 'screenshot_reported',
-    ScreenshotApproved = 'screenshot_approved',
-    ScreenshotDenied = 'screenshot_denied'
+    ScreenshotApprove = 'screenshot_approve',
+    ScreenshotDeny = 'screenshot_deny'
 }
 
