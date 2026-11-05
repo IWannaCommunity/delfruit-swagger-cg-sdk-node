@@ -17,6 +17,7 @@ import { Configuration } from '../configuration';
 // Some imports not used depending on template conditions
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, RequestArgs, BaseAPI, RequiredError } from '../base';
+import { VersionInfo } from '../models';
 /**
  * DefaultApi - axios parameter creator
  * @export
@@ -122,6 +123,39 @@ export const DefaultApiAxiosParamCreator = function (configuration?: Configurati
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        getVersion: async (options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/ping/version`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, 'https://example.com');
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+            const localVarRequestOptions :AxiosRequestConfig = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            const query = new URLSearchParams(localVarUrlObj.search);
+            for (const key in localVarQueryParameter) {
+                query.set(key, localVarQueryParameter[key]);
+            }
+            for (const key in options.params) {
+                query.set(key, options.params[key]);
+            }
+            localVarUrlObj.search = (new URLSearchParams(query)).toString();
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: localVarUrlObj.pathname + localVarUrlObj.search + localVarUrlObj.hash,
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -167,6 +201,18 @@ export const DefaultApiFp = function(configuration?: Configuration) {
                 return axios.request(axiosRequestArgs);
             };
         },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getVersion(options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<VersionInfo>>> {
+            const localVarAxiosArgs = await DefaultApiAxiosParamCreator(configuration).getVersion(options);
+            return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
+                const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
+                return axios.request(axiosRequestArgs);
+            };
+        },
     }
 };
 
@@ -199,6 +245,14 @@ export const DefaultApiFactory = function (configuration?: Configuration, basePa
          */
         async getPing(options?: AxiosRequestConfig): Promise<AxiosResponse<string>> {
             return DefaultApiFp(configuration).getPing(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async getVersion(options?: AxiosRequestConfig): Promise<AxiosResponse<VersionInfo>> {
+            return DefaultApiFp(configuration).getVersion(options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -236,5 +290,14 @@ export class DefaultApi extends BaseAPI {
      */
     public async getPing(options?: AxiosRequestConfig) : Promise<AxiosResponse<string>> {
         return DefaultApiFp(this.configuration).getPing(options).then((request) => request(this.axios, this.basePath));
+    }
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof DefaultApi
+     */
+    public async getVersion(options?: AxiosRequestConfig) : Promise<AxiosResponse<VersionInfo>> {
+        return DefaultApiFp(this.configuration).getVersion(options).then((request) => request(this.axios, this.basePath));
     }
 }
