@@ -304,12 +304,13 @@ export const ReviewsApiAxiosParamCreator = function (configuration?: Configurati
          * @param {boolean} [textReviewsFirst] 
          * @param {boolean} [includeOwnerReview] 
          * @param {boolean} [removed] 
+         * @param {boolean} [includeSelfReviews] 
          * @param {string} [orderCol] 
          * @param {string} [orderDir] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        getReviews: async (gameId?: number, userId?: number, id?: number, page?: number, limit?: number, textReviewsFirst?: boolean, includeOwnerReview?: boolean, removed?: boolean, orderCol?: string, orderDir?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
+        getReviews: async (gameId?: number, userId?: number, id?: number, page?: number, limit?: number, textReviewsFirst?: boolean, includeOwnerReview?: boolean, removed?: boolean, includeSelfReviews?: boolean, orderCol?: string, orderDir?: string, options: AxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/reviews`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, 'https://example.com');
@@ -351,6 +352,10 @@ export const ReviewsApiAxiosParamCreator = function (configuration?: Configurati
 
             if (removed !== undefined) {
                 localVarQueryParameter['removed'] = removed;
+            }
+
+            if (includeSelfReviews !== undefined) {
+                localVarQueryParameter['includeSelfReviews'] = includeSelfReviews;
             }
 
             if (orderCol !== undefined) {
@@ -682,13 +687,14 @@ export const ReviewsApiFp = function(configuration?: Configuration) {
          * @param {boolean} [textReviewsFirst] 
          * @param {boolean} [includeOwnerReview] 
          * @param {boolean} [removed] 
+         * @param {boolean} [includeSelfReviews] 
          * @param {string} [orderCol] 
          * @param {string} [orderDir] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getReviews(gameId?: number, userId?: number, id?: number, page?: number, limit?: number, textReviewsFirst?: boolean, includeOwnerReview?: boolean, removed?: boolean, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Review>>>> {
-            const localVarAxiosArgs = await ReviewsApiAxiosParamCreator(configuration).getReviews(gameId, userId, id, page, limit, textReviewsFirst, includeOwnerReview, removed, orderCol, orderDir, options);
+        async getReviews(gameId?: number, userId?: number, id?: number, page?: number, limit?: number, textReviewsFirst?: boolean, includeOwnerReview?: boolean, removed?: boolean, includeSelfReviews?: boolean, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<Array<Review>>>> {
+            const localVarAxiosArgs = await ReviewsApiAxiosParamCreator(configuration).getReviews(gameId, userId, id, page, limit, textReviewsFirst, includeOwnerReview, removed, includeSelfReviews, orderCol, orderDir, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
                 return axios.request(axiosRequestArgs);
@@ -821,13 +827,14 @@ export const ReviewsApiFactory = function (configuration?: Configuration, basePa
          * @param {boolean} [textReviewsFirst] 
          * @param {boolean} [includeOwnerReview] 
          * @param {boolean} [removed] 
+         * @param {boolean} [includeSelfReviews] 
          * @param {string} [orderCol] 
          * @param {string} [orderDir] 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async getReviews(gameId?: number, userId?: number, id?: number, page?: number, limit?: number, textReviewsFirst?: boolean, includeOwnerReview?: boolean, removed?: boolean, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Review>>> {
-            return ReviewsApiFp(configuration).getReviews(gameId, userId, id, page, limit, textReviewsFirst, includeOwnerReview, removed, orderCol, orderDir, options).then((request) => request(axios, basePath));
+        async getReviews(gameId?: number, userId?: number, id?: number, page?: number, limit?: number, textReviewsFirst?: boolean, includeOwnerReview?: boolean, removed?: boolean, includeSelfReviews?: boolean, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig): Promise<AxiosResponse<Array<Review>>> {
+            return ReviewsApiFp(configuration).getReviews(gameId, userId, id, page, limit, textReviewsFirst, includeOwnerReview, removed, includeSelfReviews, orderCol, orderDir, options).then((request) => request(axios, basePath));
         },
         /**
          * Update Review (User Only)
@@ -950,14 +957,15 @@ export class ReviewsApi extends BaseAPI {
      * @param {boolean} [textReviewsFirst] 
      * @param {boolean} [includeOwnerReview] 
      * @param {boolean} [removed] 
+     * @param {boolean} [includeSelfReviews] 
      * @param {string} [orderCol] 
      * @param {string} [orderDir] 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReviewsApi
      */
-    public async getReviews(gameId?: number, userId?: number, id?: number, page?: number, limit?: number, textReviewsFirst?: boolean, includeOwnerReview?: boolean, removed?: boolean, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Review>>> {
-        return ReviewsApiFp(this.configuration).getReviews(gameId, userId, id, page, limit, textReviewsFirst, includeOwnerReview, removed, orderCol, orderDir, options).then((request) => request(this.axios, this.basePath));
+    public async getReviews(gameId?: number, userId?: number, id?: number, page?: number, limit?: number, textReviewsFirst?: boolean, includeOwnerReview?: boolean, removed?: boolean, includeSelfReviews?: boolean, orderCol?: string, orderDir?: string, options?: AxiosRequestConfig) : Promise<AxiosResponse<Array<Review>>> {
+        return ReviewsApiFp(this.configuration).getReviews(gameId, userId, id, page, limit, textReviewsFirst, includeOwnerReview, removed, includeSelfReviews, orderCol, orderDir, options).then((request) => request(this.axios, this.basePath));
     }
     /**
      * Update Review (User Only)
