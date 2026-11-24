@@ -23,6 +23,7 @@ export * from './inline-response2003';
 export * from './inline-response2004';
 export * from './inline-response2005';
 export * from './inline-response2006';
+export * from './inline-response2007';
 export * from './inline-response204';
 export * from './keys-to-camel-case-user-can-query-result_';
 export * from './list';

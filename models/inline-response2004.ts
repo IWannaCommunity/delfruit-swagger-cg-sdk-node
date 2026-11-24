@@ -24,23 +24,5 @@ export interface InlineResponse2004 {
      * @type {number}
      * @memberof InlineResponse2004
      */
-    rating: number;
-
-    /**
-     * @type {number}
-     * @memberof InlineResponse2004
-     */
-    difficulty: number;
-
-    /**
-     * @type {string}
-     * @memberof InlineResponse2004
-     */
-    gameName: string;
-
-    /**
-     * @type {number}
-     * @memberof InlineResponse2004
-     */
-    gameId: number;
+    totalCount: number;
 }

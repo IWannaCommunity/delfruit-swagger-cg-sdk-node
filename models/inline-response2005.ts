@@ -21,14 +21,26 @@
 export interface InlineResponse2005 {
 
     /**
-     * @type {string}
+     * @type {number}
      * @memberof InlineResponse2005
      */
-    name: string;
+    rating: number;
 
     /**
      * @type {number}
      * @memberof InlineResponse2005
      */
-    userId: number;
+    difficulty: number;
+
+    /**
+     * @type {string}
+     * @memberof InlineResponse2005
+     */
+    gameName: string;
+
+    /**
+     * @type {number}
+     * @memberof InlineResponse2005
+     */
+    gameId: number;
 }

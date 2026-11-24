@@ -24,5 +24,5 @@ export interface InlineResponse2003 {
      * @type {number}
      * @memberof InlineResponse2003
      */
-    totalCount: number;
+    count: number;
 }

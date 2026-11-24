@@ -23,6 +23,7 @@ import { EditUserPermissionsParam } from '../models';
 import { IdEmailBody } from '../models';
 import { InlineResponse200 } from '../models';
 import { InlineResponse2001 } from '../models';
+import { InlineResponse2002 } from '../models';
 import { KeysToCamelCaseUserCanQueryResult_ } from '../models';
 import { OmitUserEmailOrIsAdminOrCanReportOrCanSubmitOrCanReviewOrCanScreenshotOrBanned_ } from '../models';
 import { OmitUserExtRatingsCountOrScreenshotCount_ } from '../models';
@@ -1266,7 +1267,7 @@ export const UsersApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async patchUserEmail(body: IdEmailBody, id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse2001>>> {
+        async patchUserEmail(body: IdEmailBody, id: number, options?: AxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => Promise<AxiosResponse<InlineResponse2002>>> {
             const localVarAxiosArgs = await UsersApiAxiosParamCreator(configuration).patchUserEmail(body, id, options);
             return (axios: AxiosInstance = globalAxios, basePath: string = BASE_PATH) => {
                 const axiosRequestArgs :AxiosRequestConfig = {...localVarAxiosArgs.options, url: basePath + localVarAxiosArgs.url};
@@ -1499,7 +1500,7 @@ export const UsersApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async patchUserEmail(body: IdEmailBody, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2001>> {
+        async patchUserEmail(body: IdEmailBody, id: number, options?: AxiosRequestConfig): Promise<AxiosResponse<InlineResponse2002>> {
             return UsersApiFp(configuration).patchUserEmail(body, id, options).then((request) => request(axios, basePath));
         },
         /**
@@ -1727,7 +1728,7 @@ export class UsersApi extends BaseAPI {
      * @throws {RequiredError}
      * @memberof UsersApi
      */
-    public async patchUserEmail(body: IdEmailBody, id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse2001>> {
+    public async patchUserEmail(body: IdEmailBody, id: number, options?: AxiosRequestConfig) : Promise<AxiosResponse<InlineResponse2002>> {
         return UsersApiFp(this.configuration).patchUserEmail(body, id, options).then((request) => request(this.axios, this.basePath));
     }
     /**

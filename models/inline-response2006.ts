@@ -19,4 +19,16 @@
  * @interface InlineResponse2006
  */
 export interface InlineResponse2006 {
+
+    /**
+     * @type {string}
+     * @memberof InlineResponse2006
+     */
+    name: string;
+
+    /**
+     * @type {number}
+     * @memberof InlineResponse2006
+     */
+    userId: number;
 }

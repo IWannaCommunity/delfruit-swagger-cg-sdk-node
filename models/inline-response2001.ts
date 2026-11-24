@@ -12,11 +12,12 @@
  * Do not edit the class manually.
  */
 
+import { APIError } from './apierror';
  /**
  * 
  *
  * @export
  * @interface InlineResponse2001
  */
-export interface InlineResponse2001 {
+export interface InlineResponse2001 extends APIError {
 }
